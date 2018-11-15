@@ -268,10 +268,10 @@ header{
       }
       .header-right{
         background: transparent;
-        height: 100%;
         // overflow: hidden;
         &.main-header{
           background: $dark-grey;
+          height: 100%;
         }
         .login-link{
           position: absolute;
@@ -344,6 +344,7 @@ header{
               .form-field{
                 width: 100%;
                 margin-bottom: 1.5rem;
+                position: relative;
                 label{
                   color: $yellow;
                   text-transform: capitalize;
@@ -359,6 +360,33 @@ header{
                   color: $yellow;
                   &:focus{
                     outline: 0;
+                  }
+                }
+                .fa-asterisk{
+                  position: absolute;
+                  top: 35%;
+                  right: -20px;
+                  color: #d32f2f;
+                  font-size: 10px;
+                  cursor: pointer;
+                  &:after{
+                    content: 'Field is required';
+                    position: absolute;
+                    background: #d32f2f;
+                    color: #fff;
+                    top: -11px;
+                    left: 23px;
+                    font-size: 14px;
+                    width: 110px;
+                    height: auto;
+                    padding: 9px 0;
+                    text-align: center;
+                    opacity: 0;
+                    display: inline;
+                    transition: .3s;
+                  }
+                  &:hover:after{
+                    opacity: 1;
                   }
                 }
               }
@@ -690,13 +718,13 @@ footer{
       animation: pro-vis 200ms ease-in forwards;
     }
     @keyframes pro-vis {
-    0% {
-      opacity: 0;
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
-    100% {
-      opacity: 1;
-    }
-}
     .product-box{
 
       .product-img{
