@@ -22,7 +22,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('.login-btn').click(function() {
     $('.login-target').addClass('login-active');
-    $('.header-img, .login-link').fadeOut(200);
+    $('.header-img, .login-link, #targrtLink, footer').fadeOut(200);
   })
 });
 
@@ -30,14 +30,14 @@ $(document).ready(function() {
   $('#trigger-login').click(function() {
     $('.signup-target').removeClass('login-active');
     $('.login-target').addClass('login-active');
-    $('.header-img, .login-link').fadeOut(200);
+    $('.header-img, .login-link,  #targrtLink, footer').fadeOut(200);
   })
 });
 
 $(document).ready(function() {
   $('.close-login-icon').click(function() {
     $('.login-target').removeClass('login-active');
-    $('.header-img, .login-link').fadeIn(200);
+    $('.header-img, .login-link, #targrtLink, footer').fadeIn(200);
   })
 });
 
@@ -47,21 +47,21 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('.signup-btn').click(function() {
     $('.signup-target').addClass('login-active');
-    $('.header-img, .login-link').fadeOut(200);
+    $('.header-img, .login-link, #targrtLink, footer').fadeOut(200);
   })
 });
 $(document).ready(function() {
   $('#trigger-signup').click(function() {
     $('.signup-target').addClass('login-active');
     $('.login-target').removeClass('login-active');
-    $('.header-img, .login-link').fadeOut(200);
+    $('.header-img, .login-link, #targrtLink, footer').fadeOut(200);
   })
 });
 
 $(document).ready(function() {
   $('.close-login-icon').click(function() {
     $('.signup-target').removeClass('login-active');
-    $('.header-img, .login-link').fadeIn(200);
+    $('.header-img, .login-link, #targrtLink, footer').fadeIn(200);
   })
 });
 
@@ -103,6 +103,19 @@ function targrtLink() {
 //   startDelay: 3000,
 //   loop: false
 // });
+
+  setTimeout(function(){
+  $('.contact-wrapper').addClass('contact-box-shodow')
+}, 3000);
+
+
+// products animation
+$('.product-bg').each(function(i) {
+setTimeout(function(){
+$('.product-bg').eq(i).addClass('product-visible');
+},200 * i)
+});
+// products animation
 
 $(document).ready(function() {
   $('.red.label').click(function() {
@@ -222,3 +235,8 @@ function initMap() {
 }
 
 // google maps
+
+
+// stepper jquery
+
+// stepper jquery

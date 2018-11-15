@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>Vigorizante Cart</title>
-  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="favicon.ico" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
   <meta name="format-detection" content="telephone=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
   </div> -->
   <div class="header-section">
     <div class="row">
-      <div class="col-lg-6 pr-0 wow animated slideInLeft"  data-wow-delay="0.8s">
+      <div class="col-lg-3 pr-0 wow animated slideInLeft"  data-wow-delay="0.8s">
         <div class="header-left">
           <div class="scroll wow animated fadeIn" data-wow-delay="3.5s"></div>
           <div class="menu-bar">
@@ -35,16 +35,15 @@
           </div>
           <div class="header-text">
             <h1>Your Cart</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores sequi, laudantium aut quaerat delectus nulla.</p>
-            <div class="header-btn">
+            <!-- <div class="header-btn">
               <button onclick="targrtLink()">view</button>
-            </div>
+            </div> -->
           </div>
           <div class="menu-side-overlay">
             <div class="close-menu-icon">
               <i class="far fa-times-circle"></i>
               <div class="menu-bar-wrapper">
-                <div class="menu-links">
+                <div class="menu-links inner">
                   <ul>
                     <li><a href="home.html">home</a></li>
                     <li><a href="products.html">products</a></li>
@@ -60,7 +59,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6 pl-0">
+      <div class="col-lg-9 pl-0">
         <div class="header-right wow animated slideInRight"  data-wow-delay="0.8s">
           <div class="login-link">
             <a href="javascript:void(0)" class="login-btn">Login /</a><a href="javascript:void(0)" class="signup-btn"> Signup</a>
@@ -133,158 +132,157 @@
             </div>
           </div>
 
-          <div class="header-img">
-            <img src="assets/img/vigo-caps.png" alt="">
-          </div>
+          <section class="cart-section" id="targrtLink">
+            <div class="container">
+              <!-- <div class="cart-title">
+                <h1>Cart</h1>
+              </div> -->
+              <div class="row mx-0">
+                <div class="table-responsive">
+                  <table class="table cart-table mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col" width="35%">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col" width="29%">Quantity</th>
+                        <th scope="col">total</th>
+                        <th scope="col">&nbsp;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="item-img">
+                            <img src="assets/img/vigo-caps.png" alt="">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+                          </div>
+                        </td>
+                        <td>&pound;58</td>
+                        <td>
+                          <div class="form">
+                            <div class="form-group">
+                              <div class="input-group">
+                                <span><button class="btn-inc-dec"><i class="fas fa-minus"></i></button></span>
+                                <input type="number" class="input-number" name="" id="" value="1" maxlength="2" min="1">
+                                <span><button class="btn-inc-dec"><i class="fas fa-plus"></i></button></span>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>&pound;58</td>
+                        <td><i class="far fa-times-circle"></i></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="item-img">
+                            <img src="assets/img/vigo-caps.png" alt="">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+                          </div>
+                        </td>
+                        <td>&pound;58</td>
+                        <td>
+                          <div class="form">
+                            <div class="form-group">
+                              <div class="input-group">
+                                <span><button class="btn-inc-dec"><i class="fas fa-minus"></i></button></span>
+                                <input type="number" class="input-number" name="" id="" value="1" maxlength="2" min="1">
+                                <span><button class="btn-inc-dec"><i class="fas fa-plus"></i></button></span>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>&pound;58</td>
+                        <td><i class="far fa-times-circle"></i></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="duo-btn">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <a href="#">back to store</a>
+                  </div>
+                  <div class="col-lg-6">
+                    <button>update cart</button>
+                  </div>
+                </div>
+              </div>
+              <div class="content-box">
+              <div class="box-title">
+              <h3>cart total</h3>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <h4>cart subtotal</h4>
+                  <h4>order total</h4>
+                </div>
+                <div class="col-lg-6 text-right">
+                  <h4>&euro;169.99</h4>
+                  <h4>&euro;169.99</h4>
+                </div>
+                <div class="col-lg-12">
+                  <a href="#">checkout</a>
+                </div>
+              </div>
+            </div>
+
+
+            </div>
+          </section>
+
         </div>
+
+        <footer>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="footer-links">
+                  <h4>contact us</h4>
+                  <ul>
+                    <li><a href="mailto:info@vigorizante.com">info@vigorizante.com</a></li>
+                    <li><a href="#">+9741 263 562</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="footer-links">
+                  <h4>Explore</h4>
+                  <ul>
+                    <li><a href="about-us.html">about us</a></li>
+                    <li><a href="contact-us.html">contact us</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="footer-links">
+                  <h4>legal</h4>
+                  <ul>
+                    <li><a href="privacy.html">privacy policy</a></li>
+                    <li><a href="terms.html">terms and conditions</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <i class="fab fa-facebook circle-icon"></i>
+              <i class="fab fa-twitter circle-icon"></i>
+              <i class="fab fa-instagram circle-icon"></i>
+            </div>
+            <div class="footer-logo">
+              <h1>vigorizante</h1>
+            </div>
+            <div class="copyright">
+              <p>&copy; 2018 Vigorizante. All Rights Reserved</p>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   </div>
 </header>
 
-<section class="cart-section" id="targrtLink">
-  <div class="container">
-    <div class="cart-title">
-      <h1>Cart</h1>
-    </div>
-    <div class="row mx-0">
-      <div class="table-responsive">
-        <table class="table cart-table mb-0">
-          <thead>
-            <tr>
-              <th scope="col" width="35%">Product</th>
-              <th scope="col">Price</th>
-              <th scope="col" width="29%">Quantity</th>
-              <th scope="col">total</th>
-              <th scope="col">&nbsp;</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="item-img">
-                  <img src="assets/img/vigo-caps.png" alt="">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                </div>
-              </td>
-              <td>&pound;58</td>
-              <td>
-                <div class="form">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <span><button class="btn-inc-dec"><i class="fas fa-minus"></i></button></span>
-                      <input type="number" class="input-number" name="" id="" value="1" maxlength="2" min="1">
-                      <span><button class="btn-inc-dec"><i class="fas fa-plus"></i></button></span>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td>&pound;58</td>
-              <td><i class="far fa-times-circle"></i></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="item-img">
-                  <img src="assets/img/vigo-caps.png" alt="">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                </div>
-              </td>
-              <td>&pound;58</td>
-              <td>
-                <div class="form">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <span><button class="btn-inc-dec"><i class="fas fa-minus"></i></button></span>
-                      <input type="number" class="input-number" name="" id="" value="1" maxlength="2" min="1">
-                      <span><button class="btn-inc-dec"><i class="fas fa-plus"></i></button></span>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td>&pound;58</td>
-              <td><i class="far fa-times-circle"></i></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="duo-btn">
-      <div class="row">
-        <div class="col-lg-6">
-          <a href="#">back to store</a>
-        </div>
-        <div class="col-lg-6">
-          <button>update cart</button>
-        </div>
-      </div>
-    </div>
-    <div class="content-box">
-    <div class="box-title">
-    <h3>cart total</h3>
-    </div>
-    <div class="row">
-      <div class="col-lg-6">
-        <h4>cart subtotal</h4>
-        <h4>order total</h4>
-      </div>
-      <div class="col-lg-6 text-right">
-        <h4>&euro;169.99</h4>
-        <h4>&euro;169.99</h4>
-      </div>
-      <div class="col-lg-12">
-        <a href="#">checkout</a>
-      </div>
-    </div>
-  </div>
 
-
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="footer-links">
-          <h4>contact us</h4>
-          <ul>
-            <li><a href="mailto:info@vigorizante.com">info@vigorizante.com</a></li>
-            <li><a href="#">+9741 263 562</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="footer-links">
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="about-us.html">about us</a></li>
-            <li><a href="contact-us.html">contact us</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="footer-links">
-          <h4>legal</h4>
-          <ul>
-            <li><a href="privacy.html">privacy policy</a></li>
-            <li><a href="terms.html">terms and conditions</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <i class="fab fa-facebook circle-icon"></i>
-      <i class="fab fa-twitter circle-icon"></i>
-      <i class="fab fa-instagram circle-icon"></i>
-    </div>
-    <div class="footer-logo">
-      <h1>vigorizante</h1>
-    </div>
-    <div class="copyright">
-      <p>&copy; 2018 Vigorizante. All Rights Reserved</p>
-    </div>
-  </div>
-</footer>
 
 
 
