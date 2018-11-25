@@ -26,7 +26,12 @@ function openSlideMenu(){
 function closeSlideMenu(){
   document.getElementById('side-menu').style.right = '-250px';
 }
-
+$('.open-slide').click(function() {
+  $('.side-nav a').addClass('add-box-shadow');
+});
+$('.btn-close').click(function() {
+  $('.side-nav a').removeClass('add-box-shadow');
+});
 // account swap
 // $('.table-btn').click(function(){
 //   $('.expand-table').toggleClass('showing');

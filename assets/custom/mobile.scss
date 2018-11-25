@@ -95,7 +95,7 @@ a{
       display: inline-block;
     }
     a{
-      box-shadow: none;
+      box-shadow: none!important;
     }
   }
 }
@@ -107,9 +107,13 @@ a{
   display:block;
   transition:0.3s;
   text-transform: capitalize;
-  box-shadow: 4px 4px 8px 0px #ccc;
-  -webkit-box-shadow: 4px 4px 8px 0px #ccc;
-  -moz-box-shadow: 4px 4px 8px 0px #ccc;
+  transition: box-shadow 0.5s ease-in-out;
+  transition-delay: 1s;
+  &.add-box-shadow{
+    box-shadow: 4px 4px 8px 0px #ccc;
+    -webkit-box-shadow: 4px 4px 8px 0px #ccc;
+    -moz-box-shadow: 4px 4px 8px 0px #ccc;
+  }
   &:nth-child(even){
     background: #3939391f;
   }
