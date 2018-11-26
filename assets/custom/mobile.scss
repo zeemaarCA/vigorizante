@@ -67,7 +67,7 @@ a{
     box-shadow: 3px 4px 9px 0px rgba(0, 0, 0, 0.29);
     border: solid 1px $yellow;
     background: $yellow;
-  background: -webkit-gradient(linear, left top, left bottom, from(#d8d51d), to(#d2cf15));
+    background: -webkit-gradient(linear, left top, left bottom, from(#d8d51d), to(#d2cf15));
   }
 }
 .side-nav{
@@ -211,7 +211,7 @@ a{
     width: 80%;
   }
   h4{
-    color: #9a9999;
+    color: $dark-grey;
     margin-top: 1rem;
     font-size: 11px;
     text-transform: uppercase;
@@ -224,7 +224,7 @@ a{
   }
 }
 // more text
-.some-text{
+.section-title{
   background: #ecedec;
   padding: 10px 0;
   h5{
@@ -232,7 +232,7 @@ a{
     font-size: 15px;
     text-align: center;
     font-weight: 700;
-    color: #9a9999;
+    color: $dark-grey;
     text-transform: capitalize;
     margin-bottom: 0;
   }
@@ -401,10 +401,20 @@ and (orientation: landscape) {
   }
 }
 .social-icons{
-  background: #007bb6;
-  img{
-    width: 16.7%;
-    margin-left: -4.7px;
+  background: $dark-grey;
+  ul {
+    list-style-type: none;
+    display: flex;
+    padding-left: 0;
+    margin-bottom: 0;
+    text-align: center;
+    li {
+      font-size: 3rem;
+      flex-grow: 1;
+      a {
+        color: $yellow;
+      }
+    }
   }
 }
 // ingredients page
@@ -519,12 +529,12 @@ and (orientation: landscape) {
   font-size: 18px;
 }
 .accordion {
-  background-color: #ecedec;
-  color: #828181;
+  background-color: $dark-grey;
+  color: $yellow;
   cursor: pointer;
   padding: 18px;
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid $yellow;
   text-align: left;
   outline: none;
   font-size: 14px;
@@ -533,12 +543,12 @@ and (orientation: landscape) {
 }
 
 .activee, .accordion:hover {
-  background-color: #efefef;
+  background-color: $dark-grey;
 }
 
 .accordion:after {
   content: '\002B';
-  color: #777;
+  color: $yellow;
   font-weight: bold;
   float: right;
   margin-left: 5px;
@@ -549,7 +559,7 @@ and (orientation: landscape) {
 }
 
 .panel {
-  border: 1px solid #ccc;
+  border: 1px solid $yellow;
   padding: 0 18px;
   background-color: white;
   max-height: 0;
