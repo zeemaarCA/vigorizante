@@ -799,11 +799,30 @@ footer{
   }
 }
 // privacy and terms
-
+// .payment-results-page
+.paypal-results{
+  text-align: center;
+  height: 80vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  .paypal-notification{
+    margin-top: 2rem;
+    .success-img{
+      img{
+        margin-bottom: 1rem;
+      }
+    }
+    a{
+      text-decoration: underline;
+    }
+  }
+}
+// .payment-results-page
 // cart-page
 .cart-section{
   padding: 0 4rem 1rem 0;
-  margin-top: 2rem;
+  margin-top: 7rem;
   .cart-title{
     text-align: center;
     margin: 3rem 0 1rem;
@@ -892,8 +911,9 @@ footer{
     .row .col-lg-6:last-child{
       text-align: right;
     }
-    button, a{
+    button, a, input[type=submit]{
       @include primary-btn;
+      border: 0;
     }
   }
   .cart-table td, .table th{
