@@ -2,15 +2,15 @@
 include 'includes/conn.php';
 // get ip address of User
 function getIp() {
-    $ip = $_SERVER['REMOTE_ADDR'];
+  $ip = $_SERVER['REMOTE_ADDR'];
 
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    }
+  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+  } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  }
 
-    return $ip;
+  return $ip;
 }
 
 function cart()
@@ -20,14 +20,14 @@ function cart()
     $ip = getIp();
     $pro_id = $_GET['add_cart'];
 
-    $check_pro = "SELECT * FROM cart WHERE ip_add='$ip' AND p_id='$pro_id'";
+    $check_pro = "SELECT * FROM cart WHERE c_id='".$_SESSION['customer_id']."' AND p_id='$pro_id'";
     $run_check = mysqli_query($con, $check_pro);
     if (mysqli_num_rows($run_check) > 0) {
       // echo "<script>alert('This product already added')</script>";
       echo "";
     }
     else {
-      $insert_pro = "INSERT INTO cart (p_id,ip_add,qty) VALUES ('$pro_id','$ip',1)";
+      $insert_pro = "INSERT INTO cart (c_id,p_id,ip_add,qty) VALUES ('".$_SESSION['customer_id']."','$pro_id','$ip',1)";
       $run_pro = mysqli_query($con, $insert_pro);
 
       echo "<script>window.open('cart.php', '_self')</script>";
@@ -44,19 +44,72 @@ function total_items()
   if (isset($_GET['add_cart'])) {
     global $con;
     $ip = getIp();
-    $get_items = "SELECT * FROM cart WHERE ip_add = '$ip'";
+    $get_items = "SELECT * FROM cart WHERE c_id = '".$_SESSION['customer_id']."'";
     $run_items = mysqli_query($con, $get_items);
     $count_items = mysqli_num_rows($run_items);
   }
   else {
     global $con;
     $ip = getIp();
-    $get_items = "SELECT * FROM cart WHERE ip_add = '$ip'";
+    $get_items = "SELECT * FROM cart WHERE c_id = '".$_SESSION['customer_id']."'";
     $run_items = mysqli_query($con, $get_items);
     $count_items = mysqli_num_rows($run_items);
   }
   echo $count_items;
 }
+
+
+//getting total customers
+
+function total_customers()
+{
+  global $con;
+  $ip = getIp();
+  $get_items = "SELECT * FROM customers";
+  $run_items = mysqli_query($con, $get_items);
+  $count_items = mysqli_num_rows($run_items);
+  echo $count_items;
+}
+
+
+//getting total orders
+
+function total_orders()
+{
+  global $con;
+  $ip = getIp();
+  $get_items = "SELECT * FROM orders";
+  $run_items = mysqli_query($con, $get_items);
+  $count_items = mysqli_num_rows($run_items);
+  echo $count_items;
+}
+
+
+//getting total payments
+
+function total_payments()
+{
+  global $con;
+  $ip = getIp();
+  $get_items = "SELECT * FROM payments";
+  $run_items = mysqli_query($con, $get_items);
+  $count_items = mysqli_num_rows($run_items);
+  echo $count_items;
+}
+
+
+// get total cart Price sum
+function total_price_sum(){
+  global $con;
+    $total_amount = "SELECT payment_id, SUM(amount) AS amount FROM payments";
+    $run_total_amount = mysqli_query($con, $total_amount);
+    while ($pp_price = mysqli_fetch_array($run_total_amount)) {
+      $amount = array($pp_price['amount']);
+      $values = array_sum($amount);
+    }
+  echo "&euro;". $values;
+}
+
 
 // get total cart Price
 function total_price(){
@@ -112,26 +165,26 @@ function getPro()
     echo "
 
     <div class='col-lg-4'>
-      <div class='product-box'>
-        <div class='product-img'>
-          <img src='includes/product_images/$pro_image' alt=''>
-          <a class='ui red right corner label'>
-            <i class='far fa-heart' title='Add to Wishlist'></i>
-          </a>
-        </div>
-        <div class='product-content'>
-          <h3>$pro_title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, accusamus.</p>
-          <div class='ui tag labels'>
-            <a class='ui label'>
-              &euro;$pro_price
-            </a>
-          </div>
-        </div>
-        <div class='product-btn'>
-          <button>add to cart <i class='fas fa-cart-plus'></i></button>
-        </div>
-      </div>
+    <div class='product-box'>
+    <div class='product-img'>
+    <img src='includes/product_images/$pro_image' alt=''>
+    <a class='ui red right corner label'>
+    <i class='far fa-heart' title='Add to Wishlist'></i>
+    </a>
+    </div>
+    <div class='product-content'>
+    <h3>$pro_title</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, accusamus.</p>
+    <div class='ui tag labels'>
+    <a class='ui label'>
+    &euro;$pro_price
+    </a>
+    </div>
+    </div>
+    <div class='product-btn'>
+    <button>add to cart <i class='fas fa-cart-plus'></i></button>
+    </div>
+    </div>
     </div>
 
     ";
@@ -143,4 +196,4 @@ function getPro()
 
 
 
- ?>
+?>

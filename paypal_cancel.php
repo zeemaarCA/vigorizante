@@ -47,7 +47,7 @@ include 'header.php';
           <?php if (!isset($_SESSION['customer_name'])) {
             echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
           } else {
-            echo "<a href='profile.php' class='login-btn'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn'> Logout</a>";
+            echo "<a href='profile.php' class='login-btn-idle'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn-idle'> Logout</a>";
           }
           ?>
         </div>

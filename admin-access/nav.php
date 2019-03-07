@@ -3,7 +3,7 @@
     <!-- Sidebar Header    -->
     <div class="sidenav-header d-flex align-items-center justify-content-center">
       <!-- User Info-->
-      <div class="sidenav-header-inner text-center"><img src="img/avatar-7.jpg" alt="person" class="img-fluid rounded-circle">
+      <div class="sidenav-header-inner text-center"><img src="img/profile-avatar.jpg" alt="person" class="img-fluid rounded-circle">
         <h2 class="h5">ZMT Admin Panel</h2><span>SuperFit Max</span>
       </div>
       <!-- Small Brand information, appears on minimized sidebar-->
@@ -17,6 +17,8 @@
         <li><a href="forms.php"> <i class="icon-form"></i>Add New Product</a></li>
         <li><a href="tables.php"> <i class="icon-grid"></i>View All Products </a></li>
         <li><a href="customers.php"> <i class="icon-user"></i>View All Customers </a></li>
+        <li><a href="orders.php"> <i class="fa fa-shopping-bag"></i>View All Orders </a></li>
+        <li><a href="payments.php"> <i class="fa fa-usd"></i>View All Payments </a></li>
       </ul>
     </div>
 

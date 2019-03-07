@@ -1,34 +1,37 @@
 <?php
 session_start();
+if (!isset($_SESSION['customer_name'])) {
+  header('location:products.php?msg=Please Login First');
+}
 include 'functions.php';
 include 'header.php';
 
 ?>
 <body>
-<?php
-$total = 0;
-global $con;
-$ip = getIp();
-$sel_price = "SELECT * FROM cart WHERE ip_add = '$ip'";
-$run_price = mysqli_query($con, $sel_price);
-while ($p_price = mysqli_fetch_array($run_price)) {
-  $pro_id = $p_price['p_id'];
-  $qtyd = $p_price['qty'];
-  // echo $qtyd;
-  $pro_price = "SELECT * FROM products WHERE product_id = '$pro_id'";
-  $run_pro_price = mysqli_query($con, $pro_price);
-  while ($pp_price = mysqli_fetch_array($run_pro_price)) {
-    $product_price = array($pp_price['product_price']);
-    $single_price = $pp_price['product_price'];
-    $product_title = $pp_price['product_title'];
-    $product_image = $pp_price['product_image'];
-    $total_qty_price = $single_price * $qtyd;
-    $values = array_sum($product_price);
-    $mega_total = $values * $qtyd;
-    $total += $mega_total;
-}
-}
- ?>
+  <?php
+  $total = 0;
+  global $con;
+  $ip = getIp();
+  $sel_price = "SELECT * FROM cart WHERE ip_add = '$ip'";
+  $run_price = mysqli_query($con, $sel_price);
+  while ($p_price = mysqli_fetch_array($run_price)) {
+    $pro_id = $p_price['p_id'];
+    $qtyd = $p_price['qty'];
+    // echo $qtyd;
+    $pro_price = "SELECT * FROM products WHERE product_id = '$pro_id'";
+    $run_pro_price = mysqli_query($con, $pro_price);
+    while ($pp_price = mysqli_fetch_array($run_pro_price)) {
+      $product_price = array($pp_price['product_price']);
+      $single_price = $pp_price['product_price'];
+      $product_title = $pp_price['product_title'];
+      $product_image = $pp_price['product_image'];
+      $total_qty_price = $single_price * $qtyd;
+      $values = array_sum($product_price);
+      $mega_total = $values * $qtyd;
+      $total += $mega_total;
+    }
+  }
+  ?>
   <header>
     <!-- <div class="back-logo">
     <h1>Vigorizante</h1>
@@ -70,7 +73,7 @@ while ($p_price = mysqli_fetch_array($run_price)) {
           <?php if (!isset($_SESSION['customer_name'])) {
             echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
           } else {
-            echo "<a href='profile.php' class='login-btn'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn'> Logout</a>";
+            echo "<a href='profile.php' class='login-btn-idle'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn-idle'> Logout</a>";
           }
           ?>
         </div>
@@ -116,7 +119,7 @@ while ($p_price = mysqli_fetch_array($run_price)) {
                 $total = 0;
                 global $con;
                 $ip = getIp();
-                $sel_price = "SELECT * FROM cart WHERE ip_add = '$ip'";
+                $sel_price = "SELECT * FROM cart WHERE c_id = '".$_SESSION['customer_id']."' ";
                 $run_price = mysqli_query($con, $sel_price);
                 while ($p_price = mysqli_fetch_array($run_price)) {
                   $pro_id = $p_price['p_id'];
@@ -177,16 +180,7 @@ while ($p_price = mysqli_fetch_array($run_price)) {
                 </table>
               </div>
             </div>
-            <div class="duo-btn">
-              <div class="row">
-                <div class="col-lg-6">
-                  <button>back to store</button>
-                </div>
-                <div class="col-lg-6">
-                  <button>update cart</button>
-                </div>
-              </div>
-            </div>
+            <br><br>
             <div class="content-box">
               <div class="box-title">
                 <h3>cart total</h3>
@@ -271,25 +265,26 @@ while ($p_price = mysqli_fetch_array($run_price)) {
             <div class="bottom-btn">
               <div class="row">
                 <div class="col-lg-6 col-6">
-                  <a href="#" class="float-left">back</a>
+                  <a href="checkout.php" class="float-left">back</a>
                 </div>
                 <div class="col-lg-6 col-6">
                   <!-- <button type="submit">next</button> -->
                   <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                  <input type="hidden" name="cmd" value="_xclick">
-                  <input type="hidden" name="business" value="zmt@gmail.com">
-                  <input type="hidden" name="lc" value="US">
-                  <input type="hidden" name="item_name" value="<?php echo $product_title; ?>">
-                  <input type="hidden" name="item_number" value="12325">
-                  <input type="hidden" name="amount" value="<?php echo $total; ?>">
-                  <input type="hidden" name="currency_code" value="USD">
-                  <input type="hidden" name="return" value="https://vigorizante.com/paypal_success.php">
-                  <input type="hidden" name="cancel_return" value="https://vigorizante.com/paypal_cancel.php">
-                  <input type="hidden" name="button_subtype" value="services">
-                  <input type="hidden" name="no_note" value="0">
-                  <input type="hidden" name="shipping" value="5.00">
-                  <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
-                  <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" alt="Buy now with PayPal" border="0" name="submit">
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <input type="hidden" name="business" value="zmt@gmail.com">
+                    <input type="hidden" name="lc" value="US">
+                    <input type="hidden" name="item_name" value="<?php echo $product_title; ?>">
+                    <input type="hidden" name="item_number" value="<?php echo $pro_id ?>">
+                    <input type="hidden" name="amount" value="<?php echo $total; ?>">
+
+                    <input type="hidden" name="currency_code" value="USD">
+                    <input type="hidden" name="return" value="https://zeemaar.com/vigorizante/paypal_success.php">
+                    <input type="hidden" name="cancel_return" value="https://zeemaar.com/vigorizante/paypal_cancel.php">
+                    <input type="hidden" name="button_subtype" value="services">
+                    <input type="hidden" name="no_note" value="0">
+
+                    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
+                    <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" alt="Buy now with PayPal" border="0" name="submit">
 
                   </form>
 

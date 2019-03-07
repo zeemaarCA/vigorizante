@@ -5,7 +5,8 @@ session_start();
 if (!isset($_SESSION['user_email'])) {
   header('location:index.php?msg=Please Login First');
 }
-  include 'head.php';
+include 'head.php';
+include '../functions.php';
 ?>
 
 <body>
@@ -21,7 +22,7 @@ include 'nav.php';
         <div class="container-fluid">
           <div class="navbar-holder d-flex align-items-center justify-content-between">
             <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="dashboard.php" class="navbar-brand">
-                <div class="brand-text d-none d-md-inline-block"><strong class="text-primary">SuperFit Max</strong></div>
+                <div class="brand-text d-none d-md-inline-block"><strong class="text-primary">Vigorizante</strong></div>
               </a></div>
             <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
               <!-- Notifications dropdown-->
@@ -95,8 +96,8 @@ include 'nav.php';
           <div class="col-xl-2 col-md-4 col-6">
             <div class="wrapper count-title d-flex">
               <div class="icon"><i class="icon-user"></i></div>
-              <div class="name"><strong class="text-uppercase">New Clients</strong><span>Last 7 days</span>
-                <div class="count-number">25</div>
+              <div class="name"><strong class="text-uppercase">New Customers</strong><span>Last 7 days</span>
+                <div class="count-number"><?php echo total_customers(); ?></div>
               </div>
             </div>
           </div>
@@ -104,8 +105,8 @@ include 'nav.php';
           <div class="col-xl-2 col-md-4 col-6">
             <div class="wrapper count-title d-flex">
               <div class="icon"><i class="icon-padnote"></i></div>
-              <div class="name"><strong class="text-uppercase">Work Orders</strong><span>Last 5 days</span>
-                <div class="count-number">400</div>
+              <div class="name"><strong class="text-uppercase">Product Orders</strong><span>Last 5 days</span>
+                <div class="count-number"><?php echo total_orders(); ?></div>
               </div>
             </div>
           </div>
@@ -123,7 +124,7 @@ include 'nav.php';
             <div class="wrapper count-title d-flex">
               <div class="icon"><i class="icon-bill"></i></div>
               <div class="name"><strong class="text-uppercase">New Invoices</strong><span>Last 2 days</span>
-                <div class="count-number">123</div>
+                <div class="count-number"><?php echo total_payments(); ?></div>
               </div>
             </div>
           </div>
@@ -154,28 +155,15 @@ include 'nav.php';
     <section class="statistics">
       <div class="container-fluid">
         <div class="row d-flex">
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <!-- Income-->
             <div class="card income text-center">
               <div class="icon"><i class="icon-line-chart"></i></div>
-              <div class="number">126,418</div><strong class="text-primary">All Income</strong>
+              <div class="number"><?php echo total_price_sum(); ?></div><strong class="text-primary">All Income</strong>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
             </div>
           </div>
-          <div class="col-lg-4">
-            <!-- Monthly Usage-->
-            <div class="card data-usage">
-              <h2 class="display h4">Monthly Usage</h2>
-              <div class="row d-flex align-items-center">
-                <div class="col-sm-6">
-                  <div id="progress-circle" class="d-flex align-items-center justify-content-center"></div>
-                </div>
-                <div class="col-sm-6"><strong class="text-primary">80.56 Gb</strong><small>Current Plan</small><span>100 Gb Monthly</span></div>
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <!-- User Actibity-->
             <div class="card user-activity">
               <h2 class="display h4">User Activity</h2>

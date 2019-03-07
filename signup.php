@@ -17,6 +17,7 @@ if(isset($_POST['register'])){
   $insert_c = "insert into customers (customer_ip,customer_name,customer_email,customer_pass,customer_country,customer_city,customer_contact,customer_address) values ('$ip','$c_name','$c_email','$c_pass','$c_country','$c_city','$c_contact','$c_address')";
 
   $run_c = mysqli_query($con, $insert_c);
+  $_SESSION['customer_id']=$c_id;
   $_SESSION['customer_name']=$c_name;
   $_SESSION['customer_email']=$c_email;
   $_SESSION['customer_address']=$c_address;

@@ -64,7 +64,7 @@ include '../functions.php';
               <div class="container-fluid">
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                  <li class="breadcrumb-item active">All Customers</li>
+                  <li class="breadcrumb-item active">All Payments</li>
                 </ul>
               </div>
             </div>
@@ -78,64 +78,77 @@ include '../functions.php';
                   <div class="col-lg-12">
                     <div class="card">
                       <div class="card-header">
-                        <h4>All Products</h4>
+                        <h4>All Payments</h4>
                       </div>
                       <div class="card-body">
                         <div class="table-responsive">
                           <table class="table">
                             <thead>
                               <tr>
-                                <th>Customer ID</th>
-                                <th>Customer IP</th>
-                                <th>Customer Name</th>
+                                <th>#</th>
                                 <th>Customer Email</th>
-                                <th>Customer Password</th>
-                                <th>Customer Country</th>
-                                <th>Customer City</th>
-                                <th>Customer Contact</th>
-                                <th>Customer Address</th>
-                                <th>Delete <i class="fa fa-trash"></i></th>
+                                <th>Product (S)</th>
+                                <th>Paid Amount</th>
+                                <th>Transaction ID</th>
+                                <th>Currency</th>
+                                <th>Payment Date</th>
                               </tr>
                             </thead>
                             <?php
-                            $get_cus = "SELECT * FROM customers";
-                            $run_cus = mysqli_query($con, $get_cus);
+                            $get_payment = "select * from payments";
 
-                            while ($row_cus = mysqli_fetch_array($run_cus)) {
-                              $cus_id = $row_cus['customer_id'];
-                              $cus_ip = $row_cus['customer_ip'];
-                              $cus_name = $row_cus['customer_name'];
-                              $cus_email = $row_cus['customer_email'];
-                              $cus_pass = $row_cus['customer_pass'];
-                              $cus_country = $row_cus['customer_country'];
-                              $cus_city = $row_cus['customer_city'];
-                              $cus_contact = $row_cus['customer_contact'];
-                              $cus_address = $row_cus['customer_address'];
+                            $run_payment = mysqli_query($con, $get_payment);
+
+                            $i = 0;
+
+                            while ($row_payment=mysqli_fetch_array($run_payment)){
+
+                              $amount = $row_payment['amount'];
+                              $trx_id = $row_payment['trx_id'];
+                              $currency = $row_payment['currency'];
+                              $payment_date = $row_payment['payment_date'];
+                              $pro_id = $row_payment['product_id'];
+                              $c_id = $row_payment['customer_id'];
+
+                              $i++;
+
+                              $get_pro = "select * from products where product_id='$pro_id'";
+                              $run_pro = mysqli_query($con, $get_pro);
+
+                              $row_pro=mysqli_fetch_array($run_pro);
+
+                              $pro_image = $row_pro['product_image'];
+                              $pro_title = $row_pro['product_title'];
+
+                              $get_c = "select * from customers where customer_id='$c_id'";
+                              $run_c = mysqli_query($con, $get_c);
+
+                              $row_c=mysqli_fetch_array($run_c);
+
+                              $c_email = $row_c['customer_email'];
 
                               ?>
                               <tbody>
                                 <tr>
-                                  <th scope="row"><?php echo $cus_id; ?></th>
-                                  <td><?php echo $cus_ip; ?></td>
-                                  <td><?php echo $cus_name; ?></td>
-                                  <td><?php echo $cus_email; ?></td>
-                                  <td><?php echo $cus_pass; ?></td>
-                                  <td><?php echo $cus_country; ?></td>
-                                  <td><?php echo $cus_city; ?></td>
-                                  <td><?php echo $cus_contact; ?></td>
-                                  <td><?php echo $cus_address; ?></td>
-                                    <td><a href="delete_product.php?del=<?php echo $pro_id; ?>" onClick="return confirm('Delete This item?')" class="del-icon"><i class="fa fa-trash"></i></td>
-                                    </tr>
-                                  </tbody>
-                                <?php } ?>
-                              </table>
-                            </div>
-                          </div>
+                                  <td><?php echo $i;?></td>
+                                  <td><?php echo $c_email; ?></td>
+                                  <td>
+                                    <?php echo $pro_title;?></td>
+                                  <td><?php echo $amount;?></td>
+                                  <td><?php echo $trx_id;?></td>
+                                  <td><?php echo $currency;?></td>
+                                  <td><?php echo $payment_date;?></td>
+                                </tr>
+                              </tbody>
+                            <?php } ?>
+                          </table>
                         </div>
                       </div>
                     </div>
                   </div>
-                </section>
-                <?php include 'footer.php'; ?>
-              </body>
-              </html>
+                </div>
+              </div>
+            </section>
+            <?php include 'footer.php'; ?>
+          </body>
+          </html>

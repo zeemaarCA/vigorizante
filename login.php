@@ -20,10 +20,12 @@ if(isset($_POST['login'])){
   }
   else{
     while ($row_user = mysqli_fetch_array($run_c)) {
+      $c_id = $row_user['customer_id'];
       $c_name = $row_user['customer_name'];
       $c_email = $row_user['customer_email'];
       $c_address = $row_user['customer_address'];
 
+      $_SESSION['customer_id']=$c_id;
       $_SESSION['customer_name']=$c_name;
       $_SESSION['customer_email']=$c_email;
       $_SESSION['customer_address']=$c_address;

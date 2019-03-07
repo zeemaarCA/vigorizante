@@ -64,7 +64,7 @@ include '../functions.php';
               <div class="container-fluid">
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                  <li class="breadcrumb-item active">All Customers</li>
+                  <li class="breadcrumb-item active">All Orders</li>
                 </ul>
               </div>
             </div>
@@ -78,64 +78,109 @@ include '../functions.php';
                   <div class="col-lg-12">
                     <div class="card">
                       <div class="card-header">
-                        <h4>All Products</h4>
+                        <h4>All Orders</h4>
                       </div>
                       <div class="card-body">
                         <div class="table-responsive">
                           <table class="table">
                             <thead>
                               <tr>
-                                <th>Customer ID</th>
-                                <th>Customer IP</th>
-                                <th>Customer Name</th>
+                                <th>#</th>
                                 <th>Customer Email</th>
-                                <th>Customer Password</th>
-                                <th>Customer Country</th>
-                                <th>Customer City</th>
-                                <th>Customer Contact</th>
-                                <th>Customer Address</th>
-                                <th>Delete <i class="fa fa-trash"></i></th>
+                                <th>Product (S)</th>
+                                <th>Quantity</th>
+                                <th>Invoice No</th>
+                                <th>Order Date</th>
+                                <th>Status</th>
+                                <th>Action <i class="fa fa-check"></i></th>
                               </tr>
                             </thead>
                             <?php
-                            $get_cus = "SELECT * FROM customers";
-                            $run_cus = mysqli_query($con, $get_cus);
+                            $user = $_SESSION['customer_email'];
 
-                            while ($row_cus = mysqli_fetch_array($run_cus)) {
-                              $cus_id = $row_cus['customer_id'];
-                              $cus_ip = $row_cus['customer_ip'];
-                              $cus_name = $row_cus['customer_name'];
-                              $cus_email = $row_cus['customer_email'];
-                              $cus_pass = $row_cus['customer_pass'];
-                              $cus_country = $row_cus['customer_country'];
-                              $cus_city = $row_cus['customer_city'];
-                              $cus_contact = $row_cus['customer_contact'];
-                              $cus_address = $row_cus['customer_address'];
+                            $get_c = "select * from customers where customer_email='$user'";
+
+                            $run_c = mysqli_query($con, $get_c);
+
+                            $row_c = mysqli_fetch_array($run_c);
+
+                            $c_id = $row_c['customer_id'];
+                            $c_email = $row_c['customer_email'];
+                            $c_name = $row_c['customer_name'];
+
+
+
+
+                            $get_order = "SELECT * FROM orders WHERE c_id = '$c_id'";
+
+                            $run_order = mysqli_query($con, $get_order);
+
+                            $i = 0;
+
+                            while ($row_order=mysqli_fetch_array($run_order)){
+
+                              $order_id = $row_order['order_id'];
+                              $qty = $row_order['qty'];
+                              $pro_id = $row_order['p_id'];
+                              $invoice_no = $row_order['invoice_no'];
+                              $order_date = $row_order['order_date'];
+                              $status = $row_order['status'];
+                              $i++;
+
+                              $get_pro = "select * from products where product_id='$pro_id'";
+                              $run_pro = mysqli_query($con, $get_pro);
+
+                              $row_pro=mysqli_fetch_array($run_pro);
+
+                              $pro_title = $row_pro['product_title'];
 
                               ?>
                               <tbody>
+                                <?php
+                                if ($status == 'Completed') {
+                                  echo "hello";
+                                }else {
+                                  echo "complete";
+                                }
+                                ?>
                                 <tr>
-                                  <th scope="row"><?php echo $cus_id; ?></th>
-                                  <td><?php echo $cus_ip; ?></td>
-                                  <td><?php echo $cus_name; ?></td>
-                                  <td><?php echo $cus_email; ?></td>
-                                  <td><?php echo $cus_pass; ?></td>
-                                  <td><?php echo $cus_country; ?></td>
-                                  <td><?php echo $cus_city; ?></td>
-                                  <td><?php echo $cus_contact; ?></td>
-                                  <td><?php echo $cus_address; ?></td>
-                                    <td><a href="delete_product.php?del=<?php echo $pro_id; ?>" onClick="return confirm('Delete This item?')" class="del-icon"><i class="fa fa-trash"></i></td>
-                                    </tr>
-                                  </tbody>
-                                <?php } ?>
-                              </table>
-                            </div>
+                                  <th scope="row"><?php echo $i;?></th>
+                                  <th scope="row"><?php echo $c_email;?></th>
+                                  <td><?php echo $pro_title;?></td>
+                                  <td><?php echo $qty;?></td>
+                                  <td><?php echo $invoice_no;?></td>
+                                  <td><?php echo $order_date;?></td>
+                                  <td><?php echo $status;?></td>
+                                  <?php if ($status == 'Completed') {
+                                    ?>
+                                    <td>
+                                      <i class="fa fa-check"></i>
+                                      <?php
+                                    }
+                                    else {
+                                      ?>
+                                      <td><a href="confirm_order.php?confirm_order=<?php echo $order_id;?>"><i class="fa fa-check"></i> Complete Order</td
+                                        <?php
+                                      }
+                                      ?>
+                                    </td>
+
+
+
+
+
+
+                                  </tr>
+                                </tbody>
+                              <?php } ?>
+                            </table>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </section>
-                <?php include 'footer.php'; ?>
-              </body>
-              </html>
+                </div>
+              </section>
+              <?php include 'footer.php'; ?>
+            </body>
+            </html>

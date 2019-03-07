@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION['customer_name'])) {
+  header('location:index.php?msg=Please Login First');
+}
 include 'functions.php';
 include 'header.php';
 
@@ -47,7 +50,7 @@ include 'header.php';
           <?php if (!isset($_SESSION['customer_name'])) {
             echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
           } else {
-            echo "<a href='profile.php' class='login-btn'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn'> Logout</a>";
+            echo "<a href='profile.php' class='login-btn-idle'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn-idle'> Logout</a>";
           }
           ?>
         </div>
@@ -75,6 +78,7 @@ include 'header.php';
         </div>
         <section class="cart-section" id="targrtLink">
           <div class="container">
+
             <!-- <div class="cart-title">
             <h1>Your Account</h1>
           </div> -->
@@ -93,7 +97,7 @@ include 'header.php';
             ?>
             <div class="content-box">
               <div class="box-title">
-                <h3>Customer Profile <?php echo $_SESSION['customer_name']; ?></h3>
+                <h3>Customer Profile</h3>
 
               </div>
               <div class="form-deliver col-lg-12">
@@ -140,44 +144,72 @@ include 'header.php';
           <div class="content-box">
             <div class="box-title">
               <h3>Order History</h3>
+
             </div>
             <div class="address col-lg-12">
               <div class="row">
                 <table class="table cart-table">
                   <thead>
                     <tr>
-                      <th scope="col">Product</th>
-                      <th scope="col">Order Id</th>
+                      <th scope="col">S.N</th>
+                      <th scope="col">Product (S)</th>
                       <th scope="col">Quantity</th>
-                      <th scope="col">Date</th>
+                      <th scope="col">Invoice No</th>
+                      <th scope="col">Order Date</th>
+                      <th scope="col">Status</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Product</th>
-                      <td>23152</td>
-                      <td>5</td>
-                      <td>25-02-2018</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Product</th>
-                      <td>23152</td>
-                      <td>5</td>
-                      <td>25-02-2018</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Product</th>
-                      <td>23152</td>
-                      <td>5</td>
-                      <td>25-02-2018</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Product</th>
-                      <td>23152</td>
-                      <td>5</td>
-                      <td>25-02-2018</td>
-                    </tr>
-                  </tbody>
+                  <?php
+                  $user = $_SESSION['customer_email'];
+
+                  $get_c = "select * from customers where customer_email='$user'";
+
+                  $run_c = mysqli_query($con, $get_c);
+
+                  $row_c = mysqli_fetch_array($run_c);
+
+                  $c_id = $row_c['customer_id'];
+                  $c_email = $row_c['customer_email'];
+                  $c_name = $row_c['customer_name'];
+
+
+
+
+                  $get_order = "SELECT * FROM orders WHERE c_id = '$c_id'";
+
+                  $run_order = mysqli_query($con, $get_order);
+
+                  $i = 0;
+
+                  while ($row_order=mysqli_fetch_array($run_order)){
+
+                    $order_id = $row_order['order_id'];
+                    $qty = $row_order['qty'];
+                    $pro_id = $row_order['p_id'];
+                    $invoice_no = $row_order['invoice_no'];
+                    $order_date = $row_order['order_date'];
+                    $status = $row_order['status'];
+                    $i++;
+
+                    $get_pro = "select * from products where product_id='$pro_id'";
+                    $run_pro = mysqli_query($con, $get_pro);
+
+                    $row_pro=mysqli_fetch_array($run_pro);
+
+                    $pro_title = $row_pro['product_title'];
+
+                    ?>
+                    <tbody>
+                      <tr>
+                        <th scope="row"><?php echo $i;?></th>
+                        <td><?php echo $pro_title;?></td>
+                        <td><?php echo $qty;?></td>
+                        <td><?php echo $invoice_no;?></td>
+                        <td><?php echo $order_date;?></td>
+                        <td><?php echo $status;?></td>
+                      </tr>
+                    </tbody>
+                  <?php } ?>
                 </table>
               </div>
             </div>

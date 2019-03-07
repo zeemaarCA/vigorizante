@@ -1,19 +1,21 @@
-<form action="signup.php" method="post" class="signup-sec">
-  <div class="form-field">
-    <input type="text" name="c_name" value="" placeholder="Full Name...">
-    <i class="fas fa-asterisk" aria-hidden></i>
-  </div>
-  <div class="form-field">
-    <input type="email" name="c_email" value="" placeholder="Email...">
-    <i class="fas fa-asterisk" aria-hidden></i>
-  </div>
-  <div class="form-field">
-    <input type="password" name="c_pass" value="" placeholder="Password">
-    <i class="fas fa-asterisk" aria-hidden></i>
+<form action="signup.php" method="post" class="signup-sec" id="customer_signup">
+  <p class="help-text">All field are required*.</p>
+  <div class="row">
+    <div class="form-field col-6">
+      <input type="text" name="c_name" value="" placeholder="Full Name...">
+    </div>
+    <div class="form-field col-6">
+      <input type="email" name="c_email" value="" placeholder="Email...">
+    </div>
   </div>
 
   <div class="form-field">
-    <select class="" name="c_country">
+    <input type="password" name="c_pass" placeholder="Password" id="password">
+    <i class="fas fa-eye toggle-password" toggle="#password-field"></i>
+  </div>
+<div class="row">
+  <div class="form-field col-6">
+    <select class="" name="c_country" title="Please select something!">
       <option value="Afghanistan" selected>Select Your Country...</option>
       <option value="Afghanistan">Afghanistan</option>
       <option value="Albania">Albania</option>
@@ -255,26 +257,26 @@
       <option value="Zambia">Zambia</option>
       <option value="Zimbabwe">Zimbabwe</option>
     </select>
-    <i class="fas fa-asterisk" aria-hidden></i>
   </div>
-  <div class="form-field">
+  <div class="form-field col-6">
     <input type="text" name="c_city" value="" placeholder="City">
 
   </div>
-
-  <div class="form-field">
+  </div>
+<div class="row">
+  <div class="form-field col-6">
     <select class="" name="">
       <option value="0">Select country code</option>
       <option value="0">+970</option>
       <option value="0">+546</option>
     </select>
   </div>
-  <div class="form-field">
+  <div class="form-field col-6">
     <input type="number" name="c_contact" value="" placeholder="Mobile Number">
+  </div>
   </div>
   <div class="form-field">
     <input type="text" name="c_address" value="" placeholder="Your Address">
-    <i class="fas fa-asterisk" aria-hidden></i>
   </div>
   <button type="submit" name="register">Signup</button>
   <div class="ask-signup mt-lgg">

@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION['customer_name'])) {
+  header('location:products.php?msg=Please Login First');
+}
 include 'functions.php';
 include 'header.php';
 
@@ -47,7 +50,7 @@ include 'header.php';
           <?php if (!isset($_SESSION['customer_name'])) {
             echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
           } else {
-            echo "<a href='profile.php' class='login-btn'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn'> Logout</a>";
+            echo "<a href='profile.php' class='login-btn-idle'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn-idle'> Logout</a>";
           }
           ?>
         </div>
@@ -245,10 +248,11 @@ include 'header.php';
                 <div class="bottom-btn">
                   <div class="row">
                     <div class="col-lg-6 col-6">
-                      <a href="#" class="float-left">back</a>
+                      <a href="cart.php" class="float-left">back</a>
                     </div>
                     <div class="col-lg-6 col-6">
-                      <button type="submit">next</button>
+                      <!-- <button type="submit">next</button> -->
+                      <a href="confirmation.php">next</a>
                     </div>
                   </div>
                 </div>

@@ -17,6 +17,21 @@ $(document).ready(function() {
 });
 
 
+// trigger-toast
+$('.trigger-toast').click(function() {
+  $('.container-toast').addClass('visi-visible');
+  $('.rectangle').addClass('anim-toast');
+  $('.notification-text').addClass('anim-text');
+});
+
+$('#close-trigger').click(function() {
+  $('.container-toast').removeClass('visi-visible');
+  $('.rectangle').removeClass('anim-toast');
+  $('.notification-text').removeClass('anim-text');
+});
+
+// trigger-toast
+
 
 // login activation
 $(document).ready(function() {
@@ -88,6 +103,54 @@ function targrtLink() {
     var elmnt = document.getElementById("targrtLink");
     elmnt.scrollIntoView();
 }
+// validation.js
+$(function() {
+  $.validator.setDefaults({
+    highlight: function(element) {
+      $(element).closest('.form-control').addClass('is-invalid');
+    }
+  });
+})
+
+
+$('#customer_signup').validate({ // initialize the plugin
+  rules: {
+    c_name: {
+      required: true
+    },
+    c_email: {
+      required: true,
+      email: true
+    },
+    c_pass: {
+      required: true
+    },
+    c_country: {
+      required: true
+    },
+    c_city: {
+      required: true
+    },
+    c_contact: {
+      required: true
+
+    },
+    c_address: {
+      required: true
+
+    }
+  },
+  messages: {
+
+  }
+});
+
+$(".toggle-password").click(function() {
+
+  $(this).toggleClass("far-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  $('#password').togglePassword();
+});
 // target links
 
 // signup activation

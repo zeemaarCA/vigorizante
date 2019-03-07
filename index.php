@@ -2,6 +2,7 @@
 session_start();
 include 'header.php';
 include 'functions.php';
+
 ?>
 <body>
 
@@ -46,7 +47,7 @@ include 'functions.php';
               <?php if (!isset($_SESSION['customer_name'])) {
                 echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
               } else {
-                echo "<a href='profile.php' class='login-btn'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn'> Logout</a>";
+                echo "<a href='profile.php' class='login-btn-idle'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn'> Logout</a>";
               }
               ?>
             </div>
@@ -83,7 +84,9 @@ include 'functions.php';
 
   </header>
 
-  <div class="about-section" id="targrtLink">
+
+
+  <div class="about-section" id="">
     <div class="row align-items-center">
       <div class="col-lg-6">
         <div class="about-main-img">

@@ -47,7 +47,7 @@ include 'header.php';
           <?php if (!isset($_SESSION['customer_name'])) {
             echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
           } else {
-            echo "<a href='profile.php' class='login-btn'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn'> Logout</a>";
+            echo "<a href='profile.php' class='login-btn-idle'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn-idle'> Logout</a>";
           }
           ?>
         </div>
@@ -73,17 +73,153 @@ include 'header.php';
             <?php include 'signup_include.php'; ?>
           </div>
         </div>
+
+
         <section class="cart-section" id="targrtLink">
           <div class="container paypal-results">
-            <div class="paypal-notification">
-              <div class="success-img">
-              <img src="assets/img/paypal_success_icon.png" alt="">
-              <h3>Thank You...!</h3>
+            <?php
+            $total = 0;
+
+            global $con;
+
+            $ip = getIp();
+
+            $sel_price = "select * from cart where ip_add='$ip'";
+
+            $run_price = mysqli_query($con, $sel_price);
+
+            while($p_price=mysqli_fetch_array($run_price)){
+
+              $pro_id = $p_price['p_id'];
+              $qtyd = $p_price['qty'];
+
+
+              $pro_price = "SELECT * FROM products WHERE product_id = '$pro_id'";
+              $run_pro_price = mysqli_query($con, $pro_price);
+              while ($pp_price = mysqli_fetch_array($run_pro_price)) {
+                $product_price = array($pp_price['product_price']);
+                $single_price = $pp_price['product_price'];
+                $product_id = $pp_price['product_id'];
+                $product_title = $pp_price['product_title'];
+                $total_qty_price = $single_price * $qtyd;
+                $values = array_sum($product_price);
+                $mega_total = $values * $qtyd;
+                $total += $mega_total;
+
+
+
+              }
+
+
+            }
+
+            // getting Quantity of the product
+            $get_qty = "select * from cart where p_id='$pro_id'";
+
+            $run_qty = mysqli_query($con, $get_qty);
+
+            $row_qty = mysqli_fetch_array($run_qty);
+
+            $qty = $row_qty['qty'];
+            $single_price *= $qty;
+
+
+            // this is about the customer
+            $user = $_SESSION['customer_email'];
+
+            $get_c = "select * from customers where customer_email='$user'";
+
+            $run_c = mysqli_query($con, $get_c);
+
+            $row_c = mysqli_fetch_array($run_c);
+
+            $c_id = $row_c['customer_id'];
+            $c_email = $row_c['customer_email'];
+            $c_name = $row_c['customer_name'];
+
+
+
+
+            //payment details from paypal
+
+
+
+            $amount = $_GET['amt'];
+
+            $currency = $_GET['cc'];
+
+            $trx_id = $_GET['tx'];
+
+            // $invoice = mt_rand();
+
+            $seed = str_split('abcdefghijklmnopqrstuvwxyz'
+                                 .'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                                 .'0123456789'); // and any other characters
+                shuffle($seed); // probably optional since array_is randomized; this may be redundant
+                $invoice = '';
+                foreach (array_rand($seed, 8) as $k) $invoice .= $seed[$k];
+
+            if($trx_id){
+
+
+              //inserting the payment to table
+              $insert_payment = "insert into payments (amount,customer_id,product_id,trx_id,currency,payment_date) values ('$amount','$c_id','$pro_id','$trx_id','$currency',NOW())";
+
+              $run_payment = mysqli_query($con, $insert_payment);
+
+              // inserting the order into table
+              $insert_order = "insert into orders (p_id, c_id, qty, invoice_no, order_date,status) values ('$pro_id','$c_id','$qty','$invoice',NOW(),'in Progress')";
+
+              $run_order = mysqli_query($con, $insert_order);
+
+
+              // create notifcations
+
+              // $create_notif = "insert into notifcations (notif_text, notif_status) values ('good person', 1";
+              // $run_notif = mysqli_query($con, $create_notif);
+
+
+
+              // create notifcations
+
+
+              //removing the products from cart
+              $empty_cart = "DELETE FROM cart WHERE c_id = $c_id";
+              $run_cart = mysqli_query($con, $empty_cart);
+
+            }
+
+            if($amount==$single_price){
+
+              ?>
+              <div class="paypal-notification">
+                <div class="success-img">
+                  <img src="assets/img/paypal_success_icon.png" alt="">
+                  <h3>Thank You...!</h3>
+                </div>
+                <h2>Dear <?php echo $_SESSION['customer_name']; ?></h2>
+                <p>Your Payment was successful, Please go to your account to see your order history.</p>
+                <a href="profile.php" class="btn-paypal">Go to your account</a>
               </div>
-              <h2>Dear <?php echo $_SESSION['customer_name']; ?></h2>
-              <p>Your Payment was successful, Please go to your account to see your order history.</p>
-              <a href="profile.php" class="btn-paypal">Go to your account</a>
-            </div>
+            <?php }
+            else {
+              ?>
+
+              <div class="paypal-notification">
+                <div class="success-img">
+                  <img src="assets/img/paypal_cancel_icon.png" alt="">
+                  <h3>Payment was failed</h3>
+                  <h4><?php echo $amount; ?></h4>
+                  <h4><?php echo $currency; ?></h4>
+                  <h4><?php echo $trx_id; ?></h4>
+
+                </div>
+                <h2>Dear <?php echo $_SESSION['customer_name']; ?></h2>
+                <p>Your Payment was not successful, Please go to our shop and try again..</p>
+                <a href="products.php" class="btn-paypal">Go to Shop</a>
+              </div>
+
+            <?php } ?>
           </div>
         </section>
 

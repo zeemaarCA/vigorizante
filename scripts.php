@@ -4,13 +4,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 <script src="assets/js/slick.min.js"></script>
 <script src="assets/js/onScreen.js"></script>
+<script src="assets/js/validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hideshowpassword/2.0.8/hideShowPassword.min.js"></script>
 <script src="assets/js/my.js"></script>
 <script>
 new WOW().init();
 </script>
 <script type="text/javascript">
 
-  if(typeof window.history.pushState == 'function') {
-      window.history.pushState({}, "Hide", "<?php echo $_SERVER['PHP_SELF'];?>");
-  }
+if(typeof window.history.pushState == 'function') {
+  window.history.pushState({}, "Hide", "<?php echo $_SERVER['PHP_SELF'];?>");
+}
 </script>
