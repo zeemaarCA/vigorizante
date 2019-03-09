@@ -17,17 +17,15 @@
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
 <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-<script src="vendor/chart.js/Chart.min.js"></script>
 <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/charts-home.js"></script>
 <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
- <script>tinymce.init({ selector:'textarea' });</script>
-<!-- Main File-->
+<script>tinymce.init({ selector:'textarea' });</script>
+<script src="../assets/js/my.js"></script>
 <script src="js/front.js"></script>
 <script type="text/javascript">
 
-  // if(typeof window.history.pushState == 'function') {
-  //     window.history.pushState({}, "Hide", "<?php echo $_SERVER['PHP_SELF'];?>");
-  // }
+if(typeof window.history.pushState == 'function') {
+  window.history.pushState({}, "Hide", "<?php echo $_SERVER['PHP_SELF'];?>");
+}
 </script>

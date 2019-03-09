@@ -1,4 +1,4 @@
-<form action="login.php" class="login-sec" method="post">
+<form action="login.php" class="login-sec" id="customer_login" method="post">
   <div class="form-field">
     <input type="text" name="email" value="" placeholder="Your Email...">
   </div>
