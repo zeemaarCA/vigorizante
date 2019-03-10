@@ -96,9 +96,9 @@ include '../functions.php';
                               </tr>
                             </thead>
                             <?php
-                            $user = $_SESSION['customer_email'];
+                            
 
-                            $get_c = "select * from customers where customer_email='$user'";
+                            $get_c = "select * from customers";
 
                             $run_c = mysqli_query($con, $get_c);
 

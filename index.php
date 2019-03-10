@@ -13,7 +13,7 @@ include 'functions.php';
     <div class="header-section">
       <div class="row">
         <div class="col-lg-6 pr-0 wow animated slideInLeft"  data-wow-delay="0.8s">
-          <div class="header-left not-fixed">
+          <div class="header-left not-fixed"> 
             <div class="scroll wow animated fadeIn" data-wow-delay="3.5s"></div>
             <div class="menu-bar">
               <span class="bars"></span>
