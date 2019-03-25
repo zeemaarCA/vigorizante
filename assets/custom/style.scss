@@ -1208,6 +1208,9 @@ body {
     .general-form{
       width: 100%;
       @include primary-form;
+      .update-profile{
+        @include primary-btn;
+      }
     }
   }
 }

@@ -24,7 +24,6 @@ function cart()
     $run_check = mysqli_query($con, $check_pro);
     if (mysqli_num_rows($run_check) > 0) {
       // echo "<script>alert('This product already added')</script>";
-      echo "";
     }
     else {
       $insert_pro = "INSERT INTO cart (c_id,p_id,ip_add,qty) VALUES ('".$_SESSION['customer_id']."','$pro_id','$ip',1)";

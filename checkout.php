@@ -8,7 +8,30 @@ include 'header.php';
 
 ?>
 <body>
-
+  <?php
+  $total = 0;
+  global $con;
+  $ip = getIp();
+  $sel_price = "SELECT * FROM cart WHERE ip_add = '$ip'";
+  $run_price = mysqli_query($con, $sel_price);
+  while ($p_price = mysqli_fetch_array($run_price)) {
+    $pro_id = $p_price['p_id'];
+    $qtyd = $p_price['qty'];
+    // echo $qtyd;
+    $pro_price = "SELECT * FROM products WHERE product_id = '$pro_id'";
+    $run_pro_price = mysqli_query($con, $pro_price);
+    while ($pp_price = mysqli_fetch_array($run_pro_price)) {
+      $product_price = array($pp_price['product_price']);
+      $single_price = $pp_price['product_price'];
+      $product_title = $pp_price['product_title'];
+      $product_image = $pp_price['product_image'];
+      $total_qty_price = $single_price * $qtyd;
+      $values = array_sum($product_price);
+      $mega_total = $values * $qtyd;
+      $total += $mega_total;
+    }
+  }
+  ?>
   <header>
     <!-- <div class="back-logo">
     <h1>Vigorizante</h1>
@@ -17,7 +40,7 @@ include 'header.php';
     <div class="row">
       <div class="col-lg-3 pr-0 wow animated slideInLeft"  data-wow-delay="0.8s">
         <div class="header-left">
-          <!-- <div class="scroll wow animated fadeIn" data-wow-delay="3.5s"></div> -->
+          <div class="scroll wow animated fadeIn" data-wow-delay="3.5s"></div>
           <div class="menu-bar">
             <span class="bars"></span>
           </div>
@@ -25,7 +48,7 @@ include 'header.php';
             <h1>Vigorizante</h1>
           </div>
           <div class="header-text">
-            <h1>Checkout</h1>
+            <h1>Confirm Your <br>Order</h1>
             <!-- <div class="header-btn">
             <button onclick="targrtLink()">view</button>
           </div> -->
@@ -79,310 +102,228 @@ include 'header.php';
         <section class="cart-section" id="targrtLink">
           <div class="container">
             <!-- <div class="cart-title">
-            <h1>Checkout</h1>
+            <h1>Confirmation</h1>
           </div> -->
-          <div class="container cart-popup position-relative confirmation cart">
-            <div class="content-box">
-              <div class="box-title">
-                <h3>WHERE SHOULD WE DELIVER YOUR ORDER?</h3>
-              </div>
-              <div class="contact-form">
-                <form action="#">
-                  <div class="row">
-                    <?php if (!isset($_SESSION['customer_name'])) {
-                      ?>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <input type="text" id="name" placeholder="FIRST AND LAST NAME" required="true">
-                        </div>
-                        <div class="form-group">
-                          <input type="email" id="eemail" placeholder="Email" required="true">
-                        </div>
-                        <div class="form-group">
-                          <select class="form-control" name="">
-                            <option value="0">United Arab Emirates</option>
-                            <option value="1">England</option>
-                          </select>
-                        </div>
-                        <div class="form-group">
-                          <input type="number" id="number" placeholder="MOBILE NUMBER" required="true">
-                        </div>
-                        <div class="form-group">
-                          <textarea placeholder="ADDRESS" class="w-100" required="true"></textarea>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <input type="number" id="number" placeholder="RESIDENCE NUMBER" required="true">
-                        </div>
-                        <div class="form-group">
-                          <input type="number" id="code" placeholder="POST CODE" required="true">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" id="city" placeholder="LOCALITY/CITY" required="true">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" id="country" placeholder="COUNTRY" required="true">
-                        </div>
-                        <div class="form-group">
-                          <button type="submit" class="w-40">create address</button>
-                        </div>
-                      </div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table cart-table mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col" width="35%">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col" width="29%">Quantity</th>
+                    <th scope="col">total</th>
+                  </tr>
+                </thead>
+                <?php
+                $total = 0;
+                global $con;
+                $ip = getIp();
+                $sel_price = "SELECT * FROM cart WHERE c_id = '".$_SESSION['customer_id']."' ";
+                $run_price = mysqli_query($con, $sel_price);
+                while ($p_price = mysqli_fetch_array($run_price)) {
+                  $pro_id = $p_price['p_id'];
+                  $qtyd = $p_price['qty'];
+                  // echo $qtyd;
+                  $pro_price = "SELECT * FROM products WHERE product_id = '$pro_id'";
+                  $run_pro_price = mysqli_query($con, $pro_price);
+                  while ($pp_price = mysqli_fetch_array($run_pro_price)) {
+                    $product_price = array($pp_price['product_price']);
+                    $single_price = $pp_price['product_price'];
+                    $product_title = $pp_price['product_title'];
+                    $product_image = $pp_price['product_image'];
+                    $total_qty_price = $single_price * $qtyd;
+                    $values = array_sum($product_price);
+                    $mega_total = $values * $qtyd;
+                    $total += $mega_total;
 
-                    <?php }
-                    else {
-                      ?>
-                      <div class="col-lg-5">
-                        <?php
-                        $get_customer = "SELECT * FROM customers WHERE customer_email = '".$_SESSION['customer_email']."'";
-                        $run_customer = mysqli_query($con, $get_customer);
+                    ?>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="item-img">
+                            <img src="includes/product_images/<?php echo $product_image; ?>" alt="">
+                            <p><?php echo $product_title; ?></p>
+                          </div>
+                        </td>
+                        <td>&pound<?php echo $single_price; ?></td>
+                        <td>
+                          <div class="form">
+                            <div class="form-group">
+                              <div class="input-group">
+                                <p><?php echo $qtyd ?></p>
+                                <?php
+                                if (isset($_POST['update_cart'])) {
+                                  if (isset($_POST['qty'])) {
+                                    $qty = $_POST['qty'];
+                                    $pro_id_cart_qty = $_POST['pro_id_cart_qty'];
+                                    $array = array_combine($qty,$pro_id_cart_qty);
+                                    foreach ($array as $q => $i) {
+                                      $update_qty = "UPDATE cart SET qty = '$q' WHERE p_id = '$i'";
+                                      $run_qty = mysqli_query($con, $update_qty);
+                                      // header("location: cart.php?mes=Update cart sucessfully");
+                                      echo("<script>location.href = 'cart.php?mes=Update cart sucessfully'</script>");
+                                    }
+                                    $total = $total * $qtyd;
+                                  }
+                                }
 
-                        while ($row_customer = mysqli_fetch_array($run_customer)) {
-                          $customer_name = $row_customer['customer_name'];
-                          $customer_email = $row_customer['customer_email'];
-                          $customer_country = $row_customer['customer_country'];
-                          $customer_city = $row_customer['customer_city'];
-                          $customer_contact = $row_customer['customer_contact'];
-                          $customer_address = $row_customer['customer_address'];
-                          ?>
-                        <p>current shopping address</p>
-                        <ul>
-                          <li><?php echo $customer_name; ?></li>
-                          <li><?php echo $customer_email; ?></li>
-                          <li><?php echo $customer_city; ?></li>
-                          <li><?php echo $customer_country; ?></li>
-                          <li><?php echo $customer_contact; ?></li>
-                          <li><?php echo $customer_address; ?></li>
-                        </ul>
-                        <a href="#" data-toggle="modal" data-target="#edit-shipping" data-dismiss="modal">Edit</a>
-                      </div>
-                      <div class="col-lg-7">
-                        <p>Please select the address where you want this order to be delivered</p>
-                        <select class="form-control border" name="addrs">
-                          <option value="0">Kk   dubai, 0561458489  00000 - dubai Albania</option>
-                          <option value="1">Ammar   dubai, 0561458489  00000 - dubai Albania</option>
-                          <option value="2">Harif   dubai, 0561458489  00000 - dubai Albania</option>
-                        </select>
-                        <br>
-                        <a href="#" data-toggle="modal" data-target="#add-shipping" data-dismiss="modal">add new address</a>
-                      </div>
+                                ?>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>&euro;<?php echo $total_qty_price; ?></td>
+                      </tr>
                     <?php }} ?>
-                  </div>
-                </form>
+                  </tbody>
+                </table>
               </div>
             </div>
-
+            <br><br>
+            <div class="content-box">
+              <div class="box-title">
+                <h3>cart total</h3>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <h4>cart subtotal</h4>
+                  <h4>Delivery</h4>
+                  <h4>order total</h4>
+                </div>
+                <div class="col-lg-6 text-right">
+                  <h4>&euro;<?php echo $total; ?></h4>
+                  <h4>&euro;0</h4>
+                  <h4>&euro;<?php echo $total; ?></h4>
+                </div>
+              </div>
+            </div>
 
             <div class="content-box">
               <div class="box-title">
-                <h3>shipping method</h3>
+                <h3>shipping billing address</h3>
+                <a href="#" data-toggle="modal" data-target="#edit-shipping" data-dismiss="modal">edit</a>
               </div>
-              <div class="method col-lg-12">
-                <div class="row align-items-center">
-                  <div class="col-lg-4">
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="ups-radio" name="customRadio" class="custom-control-input" checked>
-                      <label class="custom-control-label" for="ups-radio"><img src="assets/img/ups.png" alt=""></label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="ems-radio" name="customRadio" class="custom-control-input">
-                      <label class="custom-control-label" for="ems-radio"><img src="assets/img/ems.png" alt=""></label>
-                    </div>
-                  </div>
-                  <div class="col-lg-8 sh-note">
-                    <div class="ups-text">
-                      <h3>ups</h3>
-                      <h3>international courier (1 to 3 days)</h3>
-                    </div>
-                    <br>
-                    <div class="ems-text">
-                      <h3>ems</h3>
-                      <h3>EMS Express Delivery(3 to 5 days)</h3>
-                    </div>
-                  </div>
-                </div>
-                <div class="row shipping-free align-items-center">
-                  <div class="col-lg-12">
-                    <h2>Shipping is Free for This Month</h2>
-                  </div>
-                </div>
+
+              <div class="row">
+                <p>current shopping address</p>
+
+                <ul>
+                  <?php
+                  $get_customer = "SELECT * FROM customers WHERE customer_email = '".$_SESSION['customer_email']."'";
+                  $run_customer = mysqli_query($con, $get_customer);
+
+                  while ($row_customer = mysqli_fetch_array($run_customer)) {
+                    $customer_id = $row_customer['customer_id'];
+                    $customer_name = $row_customer['customer_name'];
+                    $customer_email = $row_customer['customer_email'];
+                    $customer_country = $row_customer['customer_country'];
+                    $customer_city = $row_customer['customer_city'];
+                    $customer_contact = $row_customer['customer_contact'];
+                    $customer_address = $row_customer['customer_address'];
+                    ?>
+                    <li><?php echo $customer_name; ?></li>
+                    <li><?php echo $customer_email; ?></li>
+                    <li><?php echo $customer_city; ?></li>
+                    <li><?php echo $customer_country; ?></li>
+                    <li><?php echo $customer_contact; ?></li>
+                    <li><?php echo $customer_address; ?></li>
+                  </ul>
+                <?php } ?>
               </div>
             </div>
-
-
             <div class="content-box">
               <div class="box-title">
-                <h3>Payments Method</h3>
+                <h3>payment method</h3>
               </div>
-              <div class="method col-lg-12">
-                <div class="row align-items-center">
-                  <div class="col-lg-4">
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="paypal" name="customRadio3" class="custom-control-input" checked>
-                      <label class="custom-control-label" for="paypal"><img src="assets/img/checkoutb1.png" alt=""></label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="visa" name="customRadio3" class="custom-control-input">
-                      <label class="custom-control-label" for="visa"><img src="assets/img/checkoutb5.png" alt=""></label>
-                    </div>
-                  </div>
-                  <div class="col-lg-8 sh-note">
-                    <div class="ups-text">
-                      <p>CREDIT CARD, VISA, MASTERCARD AND PAYPAL
-                        AFTER PLACING THE ORDER YOU WILL BE REDIRECTED TO OUR PAYMENT PAGE.<br>
-                        THE ORDER WILL BE DISPATCHED AFTER PAYMENT HAS BEEN MADE.</p>
-                      </div>
-                      <br>
-                      <div class="ems-text">
-                        <p>PRICES ARE DISPLAYED IN YOUR LOCAL CURRENCY, BUT PAYMENT IS CHARGED IN EUROS.<br>
-                          PLEASE NOTE THAT SOME CREDIT CARD PROVIDERS MAY CHARGE CURRENCY CONVERSION FEES.</p>
-                          <p class="theme-text">
-                            PLEASE NOTE THAT SOME CREDIT CARD PROVIDERS MAY CHARGE CURRENCY CONVERSION FEES.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div class="row align-items-center">
+                <div class="col-lg-4">
+                  <img src="assets/img/checkoutb1.png" alt="">
                 </div>
-
-                <div class="bottom-btn">
-                  <div class="row">
-                    <div class="col-lg-6 col-6">
-                      <a href="cart.php" class="float-left">back</a>
-                    </div>
-                    <div class="col-lg-6 col-6">
-                      <!-- <button type="submit">next</button> -->
-                      <a href="confirmation.php">next</a>
-                    </div>
-                  </div>
+                <div class="col-lg-8">
+                  <p class="mb-0">Paypal</p>
                 </div>
               </div>
-
-
             </div>
-          </section>
-        </div>
+            <div class="bottom-btn">
+              <div class="row">
+                <div class="col-lg-6 col-6">
+                  <a href="checkout.php" class="float-left">back</a>
+                </div>
+                <div class="col-lg-6 col-6">
+                  <!-- <button type="submit">next</button> -->
+                  <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top" class="float-right">
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <input type="hidden" name="business" value="zmt@gmail.com">
+                    <input type="hidden" name="lc" value="US">
+                    <input type="hidden" name="item_name" value="<?php echo $product_title; ?>">
+                    <input type="hidden" name="item_number" value="<?php echo $pro_id ?>">
+                    <input type="hidden" name="amount" value="<?php echo $total; ?>">
 
-        <?php include 'footer.php'; ?>
+                    <input type="hidden" name="currency_code" value="USD">
+                    <input type="hidden" name="return" value="https://zeemaar.com/vigorizante/paypal_success.php">
+                    <input type="hidden" name="cancel_return" value="https://zeemaar.com/vigorizante/paypal_cancel.php">
+                    <input type="hidden" name="button_subtype" value="services">
+                    <input type="hidden" name="no_note" value="0">
+
+                    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
+                    <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" alt="Buy now with PayPal" border="0" name="submit">
+
+                  </form>
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
       </div>
+
+
+      <!-- edit shipping address -->
+      <div class="modal fade bd-example-modal-lg" id="edit-shipping" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog all-modals-style modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="container position-relative popup-inner">
+                <div class="close-btn" data-dismiss="modal"><i class="fa fa-times"></i></div>
+                <div class="row align-items-center">
+                  <div class="popup-title">
+                    <h4>edit address</h4>
+                  </div>
+                  <div class="general-form">
+                    <form action="update_address.php" method="post">
+                      <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
+                      <div class="form-group">
+                        <input type="number" id="number" name="customer_contact" placeholder="MOBILE NUMBER" required="true" value="<?php echo $customer_contact; ?>">
+                      </div>
+                      <div class="form-group">
+                        <textarea placeholder="ADDRESS" name="customer_address" required="true"><?php echo $customer_address; ?></textarea>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" id="city" placeholder="LOCALITY/CITY" name="customer_city" required="true" value="<?php echo $customer_city; ?>">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" id="country" placeholder="COUNTRY" name="customer_country" required="true" value="<?php echo $customer_country; ?>">
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="w-40" name="update_address">update address</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <?php include 'footer.php'; ?>
     </div>
   </div>
+</div>
 </header>
-
-
-
-<!-- edit shipping address -->
-<div class="modal fade bd-example-modal-lg" id="edit-shipping" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog all-modals-style modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="container position-relative popup-inner">
-          <div class="close-btn" data-dismiss="modal"><i class="fa fa-times"></i></div>
-          <div class="row align-items-center">
-            <div class="popup-title">
-              <h4>edit address</h4>
-            </div>
-            <div class="general-form">
-              <form action="#">
-                <div class="form-group">
-                  <input type="text" id="name" placeholder="FIRST AND LAST NAME" required="true">
-                </div>
-                <div class="form-group">
-                  <input type="email" id="eemail" placeholder="Email" required="true">
-                </div>
-                <div class="form-group">
-                  <select class="form-control" name="">
-                    <option value="0">United Arab Emirates</option>
-                    <option value="1">England</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <input type="number" id="number" placeholder="MOBILE NUMBER" required="true">
-                </div>
-                <div class="form-group">
-                  <textarea placeholder="ADDRESS" required="true"></textarea>
-                </div>
-                <div class="form-group">
-                  <input type="number" id="number" placeholder="RESIDENCE NUMBER" required="true">
-                </div>
-                <div class="form-group">
-                  <input type="number" id="code" placeholder="POST CODE" required="true">
-                </div>
-                <div class="form-group">
-                  <input type="text" id="city" placeholder="LOCALITY/CITY" required="true">
-                </div>
-                <div class="form-group">
-                  <input type="text" id="country" placeholder="COUNTRY" required="true">
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="w-40">update address</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- add shipping address -->
-<div class="modal fade bd-example-modal-lg" id="add-shipping" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog all-modals-style modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="container position-relative popup-inner">
-          <div class="close-btn" data-dismiss="modal"><i class="fa fa-times"></i></div>
-          <div class="row align-items-center">
-            <div class="popup-title">
-              <h4>Add address</h4>
-            </div>
-          </div>
-          <div class="general-form">
-            <form action="#">
-              <div class="form-group">
-                <input type="text" class="form-control" id="name" placeholder="FIRST AND LAST NAME" required="true">
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" id="eemail" placeholder="Email" required="true">
-              </div>
-              <div class="form-group">
-                <select class="form-control" name="">
-                  <option value="0">United Arab Emirates</option>
-                  <option value="1">England</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <input type="number" class="form-control" id="number" placeholder="MOBILE NUMBER" required="true">
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" placeholder="ADDRESS" required="true"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="number" class="form-control" id="number" placeholder="RESIDENCE NUMBER" required="true">
-              </div>
-              <div class="form-group">
-                <input type="number" class="form-control" id="code" placeholder="POST CODE" required="true">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="city" placeholder="LOCALITY/CITY" required="true">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="country" placeholder="COUNTRY" required="true">
-              </div>
-              <div class="form-group">
-                <button type="submit" class="w-40">add address</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
 
 
 <?php include 'scripts.php'; ?>

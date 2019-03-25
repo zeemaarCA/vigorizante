@@ -239,7 +239,6 @@ include 'header.php';
                       <a href="products.php">back to store</a>
                     </div>
                     <div class="col-lg-6">
-                      <!-- <button>update cart</button> -->
                       <input type="submit" class="medium mt-0 float-right" name="update_cart" value="update cart">
                     </div>
                   </div>

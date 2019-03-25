@@ -204,9 +204,6 @@
 										<div class="success-img">
 											<img src="assets/img/paypal_cancel_icon.png" alt="">
 											<h3>Payment was failed</h3>
-											<h4><?php echo $amount; ?></h4>
-											<h4><?php echo $currency; ?></h4>
-											<h4><?php echo $trx_id; ?></h4>
 
 										</div>
 										<h2>Dear <?php echo $_SESSION['customer_name']; ?></h2>
@@ -219,6 +216,56 @@
 					</section>
 
 				</div>
+
+				<?php
+				$headers = "MIME-Version: 1.0" . "\r\n";
+							$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+							$headers .= 'From: <info@zeemaar.com>' . "\r\n";
+
+							$subject = "Order Details";
+
+							$message = "
+							<html>
+							<p>
+
+							Hello dear <b style='color:blue;'>$c_name</b> you have ordered some products on our website vigorizante.com, please find your order details, your order will be processed shortly. Thank you!</p>
+
+								<table width='600' align='center' bgcolor='#FFCC99' border='2'>
+
+									<tr align='center'><td colspan='6'><h2>Your Order Details from Vigorizante</h2></td></tr>
+
+									<tr align='center'>
+										<th><b>S.N</b></th>
+										<th><b>Product Name</b></th>
+										<th><b>Quantity</b></th>
+										<th><b>Paid Amount</th></th>
+										<th>Invoice No</th>
+									</tr>
+
+									<tr align='center'>
+										<td>1</td>
+										<td>$product_title</td>
+										<td>$qty</td>
+										<td>$amount</td>
+										<td>$invoice</td>
+									</tr>
+
+								</table>
+
+								<h3>Please go to your account and see your order details!</h3>
+
+								<h2> <a href='http://zeemaar.com/vigorizante'>Click here</a> to login to your account</h2>
+
+								<h3> Thank you for your order @ - Vigorizante</h3>
+
+							</html>
+
+							";
+
+							mail($c_email,$subject,$message,$headers);
+
+
+				 ?>
 
 				<?php include 'footer.php'; ?>
 			</div>

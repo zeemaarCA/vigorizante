@@ -49,7 +49,7 @@ if(isset($_POST['login'])){
     else {
 
       echo "<script>swal('You logged in successfully, Thanks!')</script>";
-      echo "<script>window.open('checkout.php','_self')</script>";
+      echo "<script>window.open('profile.php','_self')</script>";
 
 
     }

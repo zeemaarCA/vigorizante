@@ -96,7 +96,7 @@ include '../functions.php';
                               </tr>
                             </thead>
                             <?php
-                            
+
 
                             $get_c = "select * from customers";
 
@@ -136,13 +136,6 @@ include '../functions.php';
 
                               ?>
                               <tbody>
-                                <?php
-                                if ($status == 'Completed') {
-                                  echo "hello";
-                                }else {
-                                  echo "complete";
-                                }
-                                ?>
                                 <tr>
                                   <th scope="row"><?php echo $i;?></th>
                                   <th scope="row"><?php echo $c_email;?></th>
@@ -154,12 +147,12 @@ include '../functions.php';
                                   <?php if ($status == 'Completed') {
                                     ?>
                                     <td>
-                                      <i class="fa fa-check"></i>
+                                      <i class="fa fa-check" style="color: #19c719;"></i>
                                       <?php
                                     }
                                     else {
                                       ?>
-                                      <td><a href="confirm_order.php?confirm_order=<?php echo $order_id;?>"><i class="fa fa-check"></i> Complete Order</td
+                                      <td><a style="color: orange;" href="confirm_order.php?confirm_order=<?php echo $order_id;?>"><i class="fa fa-check"></i> Complete Order</td
                                         <?php
                                       }
                                       ?>

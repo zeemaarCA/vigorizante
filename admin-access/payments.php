@@ -134,7 +134,7 @@ include '../functions.php';
                                   <td><?php echo $c_email; ?></td>
                                   <td>
                                     <?php echo $pro_title;?></td>
-                                  <td><?php echo $amount;?></td>
+                                  <td>$<?php echo $amount;?></td>
                                   <td><?php echo $trx_id;?></td>
                                   <td><?php echo $currency;?></td>
                                   <td><?php echo $payment_date;?></td>
