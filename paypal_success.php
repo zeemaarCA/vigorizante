@@ -157,16 +157,37 @@ include 'header.php';
 
 						if ($trx_id) {
 
+							$cart_items= "select * from cart where c_id='$c_id'";
+							$run_cart_items = mysqli_query($con, $cart_items);
+							while ($cart_items_item = mysqli_fetch_array($run_cart_items)) {
+								$xpro_id = $cart_items_item['p_id'];
+								$xcustomer_id = $cart_items_item['c_id'];
+								$xqty = $cart_items_item['qty'];
+								$xprice = $cart_items_item['cart_price'];
 
-							//inserting the payment to table
-							$insert_payment = "insert into payments (amount,customer_id,product_id,trx_id,currency,payment_date) values ('$amount','$c_id','$pro_id','$trx_id','$currency',NOW())";
+								// inserting the order into table
+								$insert_order = "insert into orders (p_id, c_id, qty, single_order_price, invoice_no, order_date,status) values ('$xpro_id','$xcustomer_id','$xqty','$xprice','$invoice',NOW(),'in Progress')";
 
-							$run_payment = mysqli_query($con, $insert_payment);
+								$run_order = mysqli_query($con, $insert_order);
+
+								//inserting the payment to table
+
+
+
+								$insert_payment = "insert into payments (invoice_id,amount,single_payment_price,customer_id,product_id,trx_id,currency,payment_date) values ('$invoice','$amount','$xprice','$xcustomer_id','$xpro_id','$trx_id','$currency',NOW())";
+
+								$run_payment = mysqli_query($con, $insert_payment);
+
+
+							}
+
+
+
 
 							// inserting the order into table
-							$insert_order = "insert into orders (p_id, c_id, qty, invoice_no, order_date,status) values ('$pro_id','$c_id','$qty','$invoice',NOW(),'in Progress')";
-
-							$run_order = mysqli_query($con, $insert_order);
+							// $insert_order = "insert into orders (p_id, c_id, qty, invoice_no, order_date,status) values ('$pro_id','$c_id','$qty','$invoice',NOW(),'in Progress')";
+							//
+							// $run_order = mysqli_query($con, $insert_order);
 
 
 							// insert multiple orders into database
@@ -191,7 +212,7 @@ include 'header.php';
 
 						}
 
-						if ($amount == $single_price) {
+						if ($trx_id) {
 
 							?>
 							<div class="paypal-notification">

@@ -113,6 +113,14 @@ include 'header.php';
               </div>
             </div>
           </div>
+
+          <?php
+
+            if (isset($_GET['add_cart'])) {
+              cart();
+            }
+
+           ?>
           <div class="container tab-content products-box">
             <!-- sachets -->
             <div class="tab-pane active" id="p1">
@@ -128,7 +136,7 @@ include 'header.php';
                   $pro_price = $row_pro['product_price'];
                   $pro_desc = $row_pro['product_desc'];
                   $pro_image = $row_pro['product_image'];
-                  cart();
+
                   if (!isset($_SESSION['customer_name'])) {
 
 

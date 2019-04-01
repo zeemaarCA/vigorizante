@@ -203,7 +203,7 @@ include 'header.php';
                       $row_pro=mysqli_fetch_array($run_pro);
 
                       $pro_title = $row_pro['product_title'];
-                    }
+
                     ?>
                     <tbody>
                       <tr>
@@ -216,9 +216,10 @@ include 'header.php';
                       </tr>
                     </tbody>
                   <?php }
+                }
                   else {
                     echo "Currently You have no order.";
-                  }
+                }
                   ?>
                 </table>
               </div>

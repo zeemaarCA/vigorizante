@@ -27,17 +27,22 @@ function cart()
       echo "<script>alert('This product already added')</script>";
 
     }
-    else {
-      $insert_pro = "INSERT INTO cart (c_id,p_id,ip_add,qty) VALUES ('".$_SESSION['customer_id']."','$pro_id','$ip',1)";
-      $run_pro = mysqli_query($con, $insert_pro);
+    else{
+    $get_price_for_cart = "SELECT product_price FROM products WHERE product_id='$pro_id'";
+    $run_get_price_for_cart = mysqli_query($con, $get_price_for_cart);
+    $cart_item_price_array = mysqli_fetch_array($run_get_price_for_cart);
+
+    $cart_item_price = $cart_item_price_array['product_price'];
 
 
-      echo "<script>window.open('cart.php', '_self')</script>";
-    }
+    $insert_pro = "INSERT INTO cart (c_id,p_id,cart_price,ip_add,qty) VALUES ('".$_SESSION['customer_id']."','$pro_id','$cart_item_price','$ip',1)";
+    $run_pro = mysqli_query($con, $insert_pro);
 
+
+    echo "<script>window.open('cart.php', '_self')</script>";
   }
 
-
+}
 }
 //getting total items in cart
 
@@ -103,12 +108,12 @@ function total_payments()
 // get total cart Price sum
 function total_price_sum(){
   global $con;
-    $total_amount = "SELECT payment_id, SUM(amount) AS amount FROM payments";
-    $run_total_amount = mysqli_query($con, $total_amount);
-    while ($pp_price = mysqli_fetch_array($run_total_amount)) {
-      $amount = array($pp_price['amount']);
-      $values = array_sum($amount);
-    }
+  $total_amount = "SELECT payment_id, SUM(amount) AS amount FROM payments";
+  $run_total_amount = mysqli_query($con, $total_amount);
+  while ($pp_price = mysqli_fetch_array($run_total_amount)) {
+    $amount = array($pp_price['amount']);
+    $values = array_sum($amount);
+  }
   echo "&euro;". $values;
 }
 

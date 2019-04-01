@@ -91,6 +91,7 @@ include '../functions.php';
                                 <th>Paid Amount</th>
                                 <th>Transaction ID</th>
                                 <th>Currency</th>
+                                <th>Total</th>
                                 <th>Payment Date</th>
                               </tr>
                             </thead>
@@ -104,6 +105,7 @@ include '../functions.php';
                             while ($row_payment=mysqli_fetch_array($run_payment)){
 
                               $amount = $row_payment['amount'];
+                              $per_item_price = $row_payment['single_payment_price'];
                               $trx_id = $row_payment['trx_id'];
                               $currency = $row_payment['currency'];
                               $payment_date = $row_payment['payment_date'];
@@ -134,9 +136,10 @@ include '../functions.php';
                                   <td><?php echo $c_email; ?></td>
                                   <td>
                                     <?php echo $pro_title;?></td>
-                                  <td>$<?php echo $amount;?></td>
+                                  <td>$<?php echo $per_item_price;?></td>
                                   <td><?php echo $trx_id;?></td>
                                   <td><?php echo $currency;?></td>
+                                  <td>$<?php echo $amount;?></td>
                                   <td><?php echo $payment_date;?></td>
                                 </tr>
                               </tbody>
