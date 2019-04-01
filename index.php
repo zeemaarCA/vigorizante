@@ -13,7 +13,7 @@ include 'functions.php';
     <div class="header-section">
       <div class="row">
         <div class="col-lg-6 pr-0 wow animated slideInLeft"  data-wow-delay="0.8s">
-          <div class="header-left not-fixed"> 
+          <div class="header-left not-fixed">
             <div class="scroll wow animated fadeIn" data-wow-delay="3.5s"></div>
             <div class="menu-bar">
               <span class="bars"></span>
@@ -117,6 +117,17 @@ include 'functions.php';
   </div>
 
 
+  <!-- toast -->
+  <div class="container-toast">
+    <div class="rectangle">
+      <div class="notification-text">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>&nbsp;&nbsp;Please Login First to add item.&nbsp;&nbsp;</span><i class="fas fa-times" id="close-trigger"></i>
+      </div>
+    </div>
+  </div>
+  <!-- toast -->
+
   <div class="best-sellers">
     <div class="container">
       <div class="product-title">
@@ -135,50 +146,72 @@ include 'functions.php';
           $pro_desc = $row_pro['product_desc'];
           $pro_image = $row_pro['product_image'];
           cart();
-          ?>
-        <div class="col-lg-4">
-          <div class="product-box">
-            <img src="includes/product_images/<?php echo $pro_image; ?>" alt="">
-            <div class="product-box-content">
-              <h4><?php echo $pro_title; ?></h4>
-              <div class="addtocart-btn">
-                <a href="index.php?add_cart=<?php echo $pro_id; ?>">add to cart</a>
+
+          if (!isset($_SESSION['customer_name'])) {
+
+            ?>
+            <div class="col-lg-4">
+              <div class="product-box">
+                <img src="includes/product_images/<?php echo $pro_image; ?>" alt="">
+                <div class="product-box-content">
+                  <h4><?php echo $pro_title; ?></h4>
+                  <div class="addtocart-btn">
+                    <a href="javascript:void()" class="trigger-toast">add to cart</a>
+                  </div>
+                  <h4>&euro;<?php echo $pro_price; ?></h4>
+                </div>
               </div>
-              <h4>&euro;<?php echo $pro_price; ?></h4>
             </div>
+
+            <?php
+          }
+          else {
+
+            ?>
+
+            <div class="col-lg-4">
+              <div class="product-box">
+                <img src="includes/product_images/<?php echo $pro_image; ?>" alt="">
+                <div class="product-box-content">
+                  <h4><?php echo $pro_title; ?></h4>
+                  <div class="addtocart-btn">
+                    <a href="index.php?add_cart=<?php echo $pro_id; ?>">add to cart</a>
+                  </div>
+                  <h4>&euro;<?php echo $pro_price; ?></h4>
+                </div>
+              </div>
+            </div>
+          <?php }} ?>
+        </div>
+      </div>
+    </div>
+
+    <div class="certificates">
+      <div class="container">
+        <div class="certificate-title">
+          <h1>accreditation</h1>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-lg-4">
+            <img src="assets/img/sanidad.jpg" alt="">
+          </div>
+          <div class="col-lg-4">
+            <img src="assets/img/logo-aecosan.jpg" alt="">
+          </div>
+          <div class="col-lg-4">
+            <img src="assets/img/efsa.jpg" alt="">
           </div>
         </div>
-      <?php } ?>
+        <div class="certificate-text">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa tempora molestiae, animi aperiam sit hic impedit nam ad suscipit, unde nisi dignissimos deleniti neque, illo, rem necessitatibus aliquam. Pariatur, doloremque quis illo numquam animi aliquam nesciunt distinctio natus reiciendis dolores.</p>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="certificates">
-    <div class="container">
-      <div class="certificate-title">
-        <h1>accreditation</h1>
-      </div>
-      <div class="row align-items-center">
-        <div class="col-lg-4">
-          <img src="assets/img/sanidad.jpg" alt="">
-        </div>
-        <div class="col-lg-4">
-          <img src="assets/img/logo-aecosan.jpg" alt="">
-        </div>
-        <div class="col-lg-4">
-          <img src="assets/img/efsa.jpg" alt="">
-        </div>
-      </div>
-      <div class="certificate-text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa tempora molestiae, animi aperiam sit hic impedit nam ad suscipit, unde nisi dignissimos deleniti neque, illo, rem necessitatibus aliquam. Pariatur, doloremque quis illo numquam animi aliquam nesciunt distinctio natus reiciendis dolores.</p>
-      </div>
-    </div>
-  </div>
 
 
 
-  <?php include 'footer.php'; ?>
-  <?php include 'scripts.php'; ?>
+    <?php include 'footer.php'; ?>
+    <?php include 'scripts.php'; ?>
 
-</body>
-</html>
+  </body>
+  </html>

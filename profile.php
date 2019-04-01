@@ -181,25 +181,29 @@ include 'header.php';
 
                   $run_order = mysqli_query($con, $get_order);
 
-                  $i = 0;
+                  $count_orders = mysqli_num_rows($run_order);
 
-                  while ($row_order=mysqli_fetch_array($run_order)){
+                  $order_quantity = $count_orders;
+                  if ($order_quantity > 0) {
+                    $i = 0;
 
-                    $order_id = $row_order['order_id'];
-                    $qty = $row_order['qty'];
-                    $pro_id = $row_order['p_id'];
-                    $invoice_no = $row_order['invoice_no'];
-                    $order_date = $row_order['order_date'];
-                    $status = $row_order['status'];
-                    $i++;
+                    while ($row_order=mysqli_fetch_array($run_order)){
 
-                    $get_pro = "select * from products where product_id='$pro_id'";
-                    $run_pro = mysqli_query($con, $get_pro);
+                      $order_id = $row_order['order_id'];
+                      $qty = $row_order['qty'];
+                      $pro_id = $row_order['p_id'];
+                      $invoice_no = $row_order['invoice_no'];
+                      $order_date = $row_order['order_date'];
+                      $status = $row_order['status'];
+                      $i++;
 
-                    $row_pro=mysqli_fetch_array($run_pro);
+                      $get_pro = "select * from products where product_id='$pro_id'";
+                      $run_pro = mysqli_query($con, $get_pro);
 
-                    $pro_title = $row_pro['product_title'];
+                      $row_pro=mysqli_fetch_array($run_pro);
 
+                      $pro_title = $row_pro['product_title'];
+                    }
                     ?>
                     <tbody>
                       <tr>
@@ -211,7 +215,11 @@ include 'header.php';
                         <td><?php echo $status;?></td>
                       </tr>
                     </tbody>
-                  <?php } ?>
+                  <?php }
+                  else {
+                    echo "Currently You have no order.";
+                  }
+                  ?>
                 </table>
               </div>
             </div>
@@ -248,7 +256,7 @@ include 'header.php';
                   <input type="text" name="customer_name" value="<?php echo $customer_name; ?>" placeholder="Full Name...">
                 </div>
                 <div class="form-group">
-                  <input type="email" name="customer_email" value="<?php echo $customer_email ?>" placeholder="Email...">
+                  <input type="hidden" name="customer_email" value="<?php echo $customer_email ?>" placeholder="Email...">
                 </div>
                 <div class="form-group">
                   <input type="hidden" name="customer_pass" value="<?php echo $customer_pass ?>" placeholder="Password" id="password">

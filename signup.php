@@ -14,7 +14,12 @@ if(isset($_POST['register'])){
   $c_contact = $_POST['c_contact'];
   $c_address = $_POST['c_address'];
 
-  $insert_c = "insert into customers (customer_ip,customer_name,customer_email,customer_pass,customer_country,customer_city,customer_contact,customer_address) values ('$ip','$c_name','$c_email','$c_pass','$c_country','$c_city','$c_contact','$c_address')";
+
+  $hashed_password = password_hash($c_pass, PASSWORD_DEFAULT);
+
+
+
+  $insert_c = "insert into customers (customer_ip,customer_name,customer_email,customer_pass,customer_country,customer_city,customer_contact,customer_address) values ('$ip','$c_name','$c_email','$hashed_password','$c_country','$c_city','$c_contact','$c_address')";
 
   $run_c = mysqli_query($con, $insert_c);
   $_SESSION['customer_id']=$c_id;
@@ -37,10 +42,10 @@ if(isset($_POST['register'])){
 
     echo "<script>alert('Account has been created successfully, Thanks!')</script>";
 
-    echo "<script>window.open('checkout.php','_self')</script>";
+    echo "<script>window.open('profile.php','_self')</script>";
 
 
   }
 }
 
-  ?>
+?>

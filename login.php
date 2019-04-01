@@ -6,7 +6,7 @@ if(isset($_POST['login'])){
   $c_email = mysqli_real_escape_string($con,$_POST['email']);
   $c_pass = mysqli_real_escape_string($con,$_POST['pass']);
 
-  $sel_c = "select * from customers where customer_pass='$c_pass' AND customer_email='$c_email'";
+  $sel_c = "SELECT * FROM customers WHERE customer_email='$c_email'";
 
   $run_c = mysqli_query($con, $sel_c);
 
@@ -20,36 +20,30 @@ if(isset($_POST['login'])){
   }
   else{
     while ($row_user = mysqli_fetch_array($run_c)) {
-      $c_id = $row_user['customer_id'];
-      $c_name = $row_user['customer_name'];
-      $c_email = $row_user['customer_email'];
-      $c_address = $row_user['customer_address'];
+      // de-hashing password
+      $de_hash_pwd = password_verify($c_pass, $row_user['customer_pass']);
 
-      $_SESSION['customer_id']=$c_id;
-      $_SESSION['customer_name']=$c_name;
-      $_SESSION['customer_email']=$c_email;
-      $_SESSION['customer_address']=$c_address;
-    }
-    // $_SESSION['customer_address']=$c_address;
-    $ip = getIp();
+      if ($de_hash_pwd == false) {
+        echo "<script>alert('Password or email is incorrect, plz try again!')</script>";
+        echo "<script>window.open('index.php','_self')</script>";
+      }
+      else {
+        if ($de_hash_pwd == true) {
 
-    $sel_cart = "select * from cart where ip_add='$ip'";
+                $c_id = $row_user['customer_id'];
+                $c_name = $row_user['customer_name'];
+                $c_email = $row_user['customer_email'];
+                $c_address = $row_user['customer_address'];
 
-    $run_cart = mysqli_query($con, $sel_cart);
+                $_SESSION['customer_id']=$c_id;
+                $_SESSION['customer_name']=$c_name;
+                $_SESSION['customer_email']=$c_email;
+                $_SESSION['customer_address']=$c_address;
+                echo "<script>swal('You logged in successfully, Thanks!')</script>";
+                echo "<script>window.open('profile.php','_self')</script>";
 
-    $check_cart = mysqli_num_rows($run_cart);
-
-    if($check_customer>0 AND $check_cart==0){
-
-
-      echo "<script>swal('You logged in successfully, Thanks!')</script>";
-      echo "<script>window.open('profile.php','_self')</script>";
-
-    }
-    else {
-
-      echo "<script>swal('You logged in successfully, Thanks!')</script>";
-      echo "<script>window.open('profile.php','_self')</script>";
+        }
+      }
 
 
     }

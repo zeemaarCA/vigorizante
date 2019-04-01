@@ -1111,7 +1111,7 @@ body {
 .container-toast {
   display: flex;
   justify-content: flex-end;
-  position: absolute;
+  position: fixed;
   right: 2%;
   top: 10%;
   z-index: 10;
@@ -1215,7 +1215,13 @@ body {
   }
 }
 // modals styling
-
+.add_pro_order{
+  padding: 0!important;
+  margin-top: 0!important;
+  background: transparent!important;
+  color: inherit!important;
+  text-decoration: underline!important;
+}
 // contact-page
 .contact-wrapper{
   position: absolute;

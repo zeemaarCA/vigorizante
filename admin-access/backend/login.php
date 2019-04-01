@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include '../../includes/conn.php';
@@ -21,7 +20,7 @@ include '../../includes/conn.php';
 
 	$_SESSION['user_email']=$email;
 
-	echo "<script>window.open('../dashboard.php','_self')</script>";
+	header('Location:../dashboard.php');
 
 	}
 	else {

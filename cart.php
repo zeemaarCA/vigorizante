@@ -78,6 +78,16 @@ include 'header.php';
         </div>
       </div>
 
+      <?php
+
+      if (isset($_GET['add_cart'])){
+        cart();
+      }
+
+
+       ?>
+
+
       <section class="cart-section" id="targrtLink">
         <div class="container">
           <p class="bg-success text-white p-2 d-none <?php if(@$_GET['mes']){echo 'd-block';};?>"><?php if(@$_GET['mes']){echo "Cart has been successfully upadated";}; ?></p>
@@ -123,7 +133,7 @@ include 'header.php';
                   $pro_price = $row_pro['product_price'];
                   $pro_desc = $row_pro['product_desc'];
                   $pro_image = $row_pro['product_image'];
-                  cart();
+
                   ?>
                 <div class="col-lg-4">
                   <div class="product-box">
@@ -131,7 +141,7 @@ include 'header.php';
                     <div class="product-box-content">
                       <h4><?php echo $pro_title; ?></h4>
                       <div class="addtocart-btn">
-                        <a href="index.php?add_cart=<?php echo $pro_id; ?>">add to cart</a>
+                        <a href="cart.php?add_cart=<?php echo $pro_id; ?>">add to cart</a>
                       </div>
                       <h4>&euro;<?php echo $pro_price; ?></h4>
                     </div>

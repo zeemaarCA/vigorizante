@@ -20,7 +20,7 @@ include '../functions.php';
         <div class="container-fluid">
           <div class="navbar-holder d-flex align-items-center justify-content-between">
             <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="dashboard.php" class="navbar-brand">
-              <div class="brand-text d-none d-md-inline-block"><strong class="text-primary">SuperFit Max</strong></div>
+              <div class="brand-text d-none d-md-inline-block"><strong class="text-primary">Vigorizante</strong></div>
             </a></div>
             <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
               <!-- Notifications dropdown-->
@@ -72,7 +72,7 @@ include '../functions.php';
               <div class="container-fluid">
                 <!-- Page Header-->
                 <header>
-                  <h1 class="h3 display">Tables            </h1>
+                  <h1 class="h3 display">Tables</h1>
                 </header>
                 <div class="row">
                   <div class="col-lg-12">

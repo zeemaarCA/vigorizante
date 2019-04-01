@@ -123,7 +123,9 @@ $('#customer_signup').validate({ // initialize the plugin
 			email: true
 		},
 		c_pass: {
-			required: true
+			required: true,
+			minlength: 6,
+			
 		},
 		c_country: {
 			required: true

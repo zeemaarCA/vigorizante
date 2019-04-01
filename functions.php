@@ -21,13 +21,16 @@ function cart()
     $pro_id = $_GET['add_cart'];
 
     $check_pro = "SELECT * FROM cart WHERE c_id='".$_SESSION['customer_id']."' AND p_id='$pro_id'";
+
     $run_check = mysqli_query($con, $check_pro);
     if (mysqli_num_rows($run_check) > 0) {
-      // echo "<script>alert('This product already added')</script>";
+      echo "<script>alert('This product already added')</script>";
+
     }
     else {
       $insert_pro = "INSERT INTO cart (c_id,p_id,ip_add,qty) VALUES ('".$_SESSION['customer_id']."','$pro_id','$ip',1)";
       $run_pro = mysqli_query($con, $insert_pro);
+
 
       echo "<script>window.open('cart.php', '_self')</script>";
     }
