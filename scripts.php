@@ -6,6 +6,8 @@
 <script src="assets/js/onScreen.js"></script>
 <script src="assets/js/validate.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hideshowpassword/2.0.8/hideShowPassword.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdc9BzbbBEerUMDGWVxwDcHJ87dMb02Rw&callback=initMap" async
+defer></script>
 <script src="assets/js/my.js"></script>
 <script>
 new WOW().init();

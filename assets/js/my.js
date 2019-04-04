@@ -32,6 +32,55 @@ $('#close-trigger').click(function () {
 
 // trigger-toast
 
+// send email
+function sendContact() {
+	var b;
+	b = validateContact();
+	if (b) {
+		jQuery.ajax({
+			url: "includes/mail.php",
+			data: "userName=" + $("#userName").val() + "&userEmail=" + $("#userEmail").val() + "&content=" + $("#content").val() + "&email_msg=" + $("#email_msg").val(),
+			type: "POST",
+			success: function(a) {
+				$("#mail-status").html(a)
+			},
+			error: function() {}
+		})
+	}
+}
+
+function validateContact() {
+	var b = true;
+	$(".demoInputBox").css("background-color", "");
+	$(".info").html("");
+	if (!$("#userName").val()) {
+		$("#userName-info").html("*Field is required");
+		$("#userName").css("border-bottom", "2px solid #e53935");
+		b = false
+	}
+	if (!$("#userEmail").val()) {
+		$("#userEmail-info").html("*Field is required");
+		$("#userEmail").css("border-bottom", "2px solid #e53935");
+		b = false
+	}
+	if (!$("#userEmail").val().match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
+		$("#userEmail-info").html("*Email is invalid");
+		$("#userEmail").css("border-bottom", "2px solid #e53935");
+		b = false
+	}
+	if (!$("#content").val()) {
+		$("#content-info").html("*Field is required");
+		$("#content").css("border-bottom", "2px solid #e53935");
+		b = false
+	}
+	if (!$("#email_msg").val()) {
+		$("#msg-info").html("*Field is required");
+		$("#email_msg").css("border-bottom", "2px solid #e53935");
+		b = false
+	}
+	return b
+};
+
 
 // login activation
 $(document).ready(function () {
@@ -124,8 +173,8 @@ $('#customer_signup').validate({ // initialize the plugin
 		},
 		c_pass: {
 			required: true,
-			minlength: 6,
-			
+			minlength: 6
+
 		},
 		c_country: {
 			required: true
@@ -165,6 +214,45 @@ $('#admin_login').validate({
 		},
 		password: {
 			required: true
+		}
+	}
+});
+
+
+$('#change_password').validate({
+	rules: {
+		old_password: {
+			required: true,
+			minlength: 6
+		},
+		new_password: {
+			required: true,
+			minlength: 6
+		},
+		confirm_password: {
+			required: true,
+			minlength: 6
+		}
+	}
+});
+
+$('#change_profile').validate({
+	rules: {
+		customer_name: {
+			required: true
+		},
+		customer_country: {
+			required: true
+		},
+		customer_city: {
+			required: true
+		},
+		customer_contact: {
+			required: true
+		},
+		customer_address: {
+			required: true
+
 		}
 	}
 });

@@ -77,6 +77,19 @@ include 'header.php';
           }
           ?>
         </div>
+        <div class="cart-icon-link">
+
+          <?php if (!isset($_SESSION['customer_name'])) {
+            echo "";
+          }
+            else {
+              ?>
+              <a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-cart"> <?php echo total_cart_quantity(); ?></span></a>
+              <?php
+            }
+             ?>
+
+        </div>
         <div class="login-register-wrapper login-target">
           <div class="close-login-icon">
             <i class="far fa-times-circle"></i>
@@ -261,8 +274,8 @@ include 'header.php';
                     <input type="hidden" name="amount" value="<?php echo $total; ?>">
 
                     <input type="hidden" name="currency_code" value="USD">
-                    <input type="hidden" name="return" value="https://zeemaar.com/vigorizante/paypal_success.php">
-                    <input type="hidden" name="cancel_return" value="https://zeemaar.com/vigorizante/paypal_cancel.php">
+                    <input type="hidden" name="return" value="http://excaliburgold.de/vigorizante/paypal_success.php">
+                    <input type="hidden" name="cancel_return" value="http://excaliburgold.de/vigorizante/paypal_cancel.php">
                     <input type="hidden" name="button_subtype" value="services">
                     <input type="hidden" name="no_note" value="0">
 

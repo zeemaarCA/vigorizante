@@ -16,7 +16,7 @@
 <div class="row">
   <div class="form-field col-6">
     <select class="" name="c_country" title="Please select something!">
-      <option value="Afghanistan" selected>Select Your Country...</option>
+      <option value="" selected>Select Your Country...</option>
       <option value="Afghanistan">Afghanistan</option>
       <option value="Albania">Albania</option>
       <option value="Algeria">Algeria</option>

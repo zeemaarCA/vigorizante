@@ -51,6 +51,19 @@ include 'header.php';
 					}
 					?>
 				</div>
+				<div class="cart-icon-link">
+
+					<?php if (!isset($_SESSION['customer_name'])) {
+						echo "";
+					}
+						else {
+							?>
+							<a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-cart"> <?php echo total_cart_quantity(); ?></span></a>
+							<?php
+						}
+						 ?>
+
+				</div>
 				<div class="login-register-wrapper login-target">
 					<div class="close-login-icon">
 						<i class="far fa-times-circle"></i>
@@ -248,7 +261,7 @@ include 'header.php';
 				<?php
 				$headers = "MIME-Version: 1.0" . "\r\n";
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-				$headers .= 'From: <info@zeemaar.com>' . "\r\n";
+				$headers .= 'From: <admin@excaliburgold.de>' . "\r\n";
 
 				$subject = "Order Details";
 

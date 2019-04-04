@@ -15,5 +15,4 @@
   <link rel="stylesheet" href="assets/css/slick.css">
   <link rel="stylesheet" href="assets/css/slick-theme.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>

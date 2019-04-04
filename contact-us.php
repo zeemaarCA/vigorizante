@@ -43,7 +43,25 @@ include 'functions.php';
     <div class="col-lg-9 pl-0">
       <div class="header-right wow animated slideInRight"  data-wow-delay="0.8s">
         <div class="login-link">
-          <a href="javascript:void(0)" class="login-btn">Login /</a><a href="javascript:void(0)" class="signup-btn"> Signup</a>
+          <?php if (!isset($_SESSION['customer_name'])) {
+            echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
+          } else {
+            echo "<a href='profile.php' class='login-btn-idle'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn-idle'> Logout</a>";
+          }
+          ?>
+        </div>
+        <div class="cart-icon-link">
+
+          <?php if (!isset($_SESSION['customer_name'])) {
+            echo "";
+          }
+            else {
+              ?>
+              <a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-cart"> <?php echo total_cart_quantity(); ?></span></a>
+              <?php
+            }
+             ?>
+
         </div>
         <div class="login-register-wrapper login-target">
           <div class="close-login-icon">
@@ -71,25 +89,31 @@ include 'functions.php';
           <div class="contact-wrapper">
             <div class="row">
               <div class="col-lg-7 contact-form">
-                <form action="" class="signup-sec">
+                <div id="mail-status"></div>
+                <div class="signup-sec">
                   <div class="row">
                     <div class="form-field col-6">
-                      <input type="text" name="name" value="" placeholder="Your Name...">
+                      <input type="text" name="name" value="" id="userName" placeholder="Your Name...">
+                      <span id="userName-info" class="info"></span>
                     </div>
                     <div class="form-field col-6">
-                      <input type="email" name="email" value="" placeholder="Your Email">
+                      <input type="email" name="email" value="" id="userEmail" placeholder="Your Email">
+                      <span id="userEmail-info" class="info"></span>
                     </div>
                     <div class="form-field col-12">
-                      <input type="text" name="subject" value="" placeholder="Subject">
+                      <input type="text" name="subject" value="" id="content" placeholder="Subject">
+                      <span id="content-info" class="info"></span>
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-field col-12">
-                      <textarea name="msg" rows="6" cols="80" placeholder="Your Message"></textarea>
+                      <textarea name="msg" rows="6" cols="80" placeholder="Your Message" id="email_msg"></textarea>
+                      <span id="msg-info" class="info"></span>
                     </div>
                   </div>
-                  <button type="submit">Send</button>
-                </form>
+                  <button onClick="sendContact();">Send</button>
+                  <span id="content-info" class="info"></span>
+                </div>
               </div>
               <div class="col-lg-5">
                 <div id="map"></div>
@@ -107,5 +131,9 @@ include 'functions.php';
 
 
 <?php include 'scripts.php'; ?>
+
+
+
+
 </body>
 </html>

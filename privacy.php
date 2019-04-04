@@ -22,7 +22,7 @@ include 'header.php';
             <h1>Vigorizante</h1>
           </div>
           <div class="header-text">
-            <h1>Privacy and <br> Policy</h1>
+            <h1>Privacy &amp; <br> Policy</h1>
             <!-- <div class="header-btn">
             <button onclick="targrtLink()">View</button>
           </div> -->
@@ -44,7 +44,25 @@ include 'header.php';
     <div class="col-lg-9 pl-0">
       <div class="header-right wow animated slideInRight"  data-wow-delay="0.8s">
         <div class="login-link">
-          <a href="javascript:void(0)" class="login-btn">Login /</a><a href="javascript:void(0)" class="signup-btn"> Signup</a>
+          <?php if (!isset($_SESSION['customer_name'])) {
+            echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
+          } else {
+            echo "<a href='profile.php' class='login-btn-idle'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn-idle'> Logout</a>";
+          }
+          ?>
+        </div>
+        <div class="cart-icon-link">
+
+          <?php if (!isset($_SESSION['customer_name'])) {
+            echo "";
+          }
+            else {
+              ?>
+              <a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-cart"> <?php echo total_cart_quantity(); ?></span></a>
+              <?php
+            }
+             ?>
+
         </div>
         <div class="login-register-wrapper login-target">
           <div class="close-login-icon">

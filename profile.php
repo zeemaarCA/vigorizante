@@ -54,6 +54,19 @@ include 'header.php';
           }
           ?>
         </div>
+        <div class="cart-icon-link">
+
+          <?php if (!isset($_SESSION['customer_name'])) {
+            echo "";
+          }
+            else {
+              ?>
+              <a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-cart"> <?php echo total_cart_quantity(); ?></span></a>
+              <?php
+            }
+             ?>
+
+        </div>
         <div class="login-register-wrapper login-target">
           <div class="close-login-icon">
             <i class="far fa-times-circle"></i>
@@ -249,22 +262,13 @@ include 'header.php';
               <h4>Update Profile</h4>
             </div>
             <div class="general-form">
-              <form action="update_profile.php" method="post">
-                <div class="form-group">
-                  <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
-                </div>
+              <form action="update_profile.php" method="post" id="change_profile">
                 <div class="form-group">
                   <input type="text" name="customer_name" value="<?php echo $customer_name; ?>" placeholder="Full Name...">
                 </div>
                 <div class="form-group">
-                  <input type="hidden" name="customer_email" value="<?php echo $customer_email ?>" placeholder="Email...">
-                </div>
-                <div class="form-group">
-                  <input type="hidden" name="customer_pass" value="<?php echo $customer_pass ?>" placeholder="Password" id="password">
-                </div>
-                <div class="form-group">
                   <select class="" name="customer_country" title="Please select something!">
-                    <option value="Afghanistan" selected>Select Your Country...</option>
+                    <option value="" selected>Select Your Country...</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Albania">Albania</option>
                     <option value="Algeria">Algeria</option>
@@ -537,17 +541,17 @@ include 'header.php';
               <h4>Change Password</h4>
             </div>
             <div class="general-form">
-              <form action="#">
+              <form action="change_password.php" method="post" id="change_password">
                 <div class="form-group">
-                  <input type="password" name="username" value="" placeholder="Old Password">
+                  <input type="password" name="old_password" value="" placeholder="Old Password">
                 </div>
                 <div class="form-group">
-                  <input type="password" name="password" value="" placeholder="New Password">
+                  <input type="password" name="new_password" value="" placeholder="New Password">
                 </div>
                 <div class="form-group">
-                  <input type="password" name="password" value="" placeholder="Confirm Password">
+                  <input type="password" name="confirm_password" value="" placeholder="Confirm Password">
                 </div>
-                <button type="submit">Update</button>
+                <input type="submit" name="update_password" value="Update Password" class="update-profile">
               </form>
             </div>
           </div>

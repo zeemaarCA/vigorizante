@@ -14,8 +14,8 @@
         <div class="footer-links">
           <h4>Explore</h4>
           <ul>
-            <li><a href="about-us.html">about us</a></li>
-            <li><a href="contact-us.html">contact us</a></li>
+            <li><a href="about-us.php">about us</a></li>
+            <li><a href="contact-us.php">contact us</a></li>
           </ul>
         </div>
       </div>
@@ -23,8 +23,8 @@
         <div class="footer-links">
           <h4>legal</h4>
           <ul>
-            <li><a href="privacy.html">privacy policy</a></li>
-            <li><a href="terms.html">terms and conditions</a></li>
+            <li><a href="privacy.php">privacy policy</a></li>
+            <li><a href="terms.php">terms and conditions</a></li>
           </ul>
         </div>
       </div>

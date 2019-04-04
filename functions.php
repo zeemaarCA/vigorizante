@@ -38,7 +38,6 @@ function cart()
     $insert_pro = "INSERT INTO cart (c_id,p_id,cart_price,ip_add,qty) VALUES ('".$_SESSION['customer_id']."','$pro_id','$cart_item_price','$ip',1)";
     $run_pro = mysqli_query($con, $insert_pro);
 
-
     echo "<script>window.open('cart.php', '_self')</script>";
   }
 
@@ -102,6 +101,17 @@ function total_payments()
   $run_items = mysqli_query($con, $get_items);
   $count_items = mysqli_num_rows($run_items);
   echo $count_items;
+}
+
+//getting total cart Quantity
+
+function total_cart_quantity()
+{
+  global $con;
+  $get_cart_quantity = "SELECT * FROM cart";
+  $run_cart_quantity = mysqli_query($con, $get_cart_quantity);
+  $count_cart_quantity = mysqli_num_rows($run_cart_quantity);
+  echo $count_cart_quantity;
 }
 
 
