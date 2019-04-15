@@ -215,7 +215,7 @@ include 'header.php';
             <div class="content-box">
               <div class="box-title">
                 <h3>shipping billing address</h3>
-                <a href="#" data-toggle="modal" data-target="#edit-shipping" data-dismiss="modal">edit</a>
+                <a href="javascript:void(0)" data-toggle="modal" data-target="#edit-shipping" data-dismiss="modal">edit</a>
               </div>
 
               <div class="row">
@@ -241,8 +241,9 @@ include 'header.php';
                     <li><?php echo $customer_country; ?></li>
                     <li><?php echo $customer_contact; ?></li>
                     <li><?php echo $customer_address; ?></li>
-                  </ul>
+                  
                 <?php } ?>
+                </ul>
               </div>
             </div>
             <div class="content-box">
