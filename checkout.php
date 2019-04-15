@@ -241,7 +241,7 @@ include 'header.php';
                     <li><?php echo $customer_country; ?></li>
                     <li><?php echo $customer_contact; ?></li>
                     <li><?php echo $customer_address; ?></li>
-                  
+
                 <?php } ?>
                 </ul>
               </div>
@@ -270,7 +270,7 @@ include 'header.php';
                     <input type="hidden" name="cmd" value="_xclick">
                     <input type="hidden" name="business" value="zmt@gmail.com">
                     <input type="hidden" name="lc" value="US">
-                    <input type="hidden" name="item_name" value="<?php echo $product_title; ?>">
+                    <input type="hidden" name="item_name" value="Vigorizante Products">
                     <input type="hidden" name="item_number" value="<?php echo $pro_id ?>">
                     <input type="hidden" name="amount" value="<?php echo $total; ?>">
 
