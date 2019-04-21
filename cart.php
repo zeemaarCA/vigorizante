@@ -6,6 +6,30 @@ if (!isset($_SESSION['customer_name'])) {
 }
 include 'functions.php';
 include 'header.php';
+
+
+if (isset($_POST['update_cart'])) {
+  if (isset($_POST['qty'])) {
+    $qty = $_POST['qty'];
+    $pro_id_cart_qty = $_POST['pro_id_cart_qty'];
+    $array = array_combine($pro_id_cart_qty, $qty);
+    print_r($array);
+    foreach ($array as $i => $q) {
+      $single_fetch_price = "SELECT product_price FROM products WHERE product_id = '$i'";
+      $run_single_fetch_price = mysqli_query($con, $single_fetch_price);
+      $product_pricex = mysqli_fetch_assoc($run_single_fetch_price);
+
+      $final_total_price_db = $q * $product_pricex['product_price'];
+      $update_qty = "UPDATE cart SET qty = '$q', cart_price = '$final_total_price_db' WHERE p_id = '$i' AND c_id = '".$_SESSION['customer_id']."'";
+      $run_qty = mysqli_query($con, $update_qty);
+
+    }
+    // header("location: cart.php?mes=Update cart sucessfully");
+    echo("<script>location.href = 'cart.php?mes=Update cart sucessfully'</script>");
+
+    $total = $total * $qtyd;
+  }
+}
 ?>
 <body>
 
@@ -60,12 +84,12 @@ include 'header.php';
           <?php if (!isset($_SESSION['customer_name'])) {
             echo "";
           }
-            else {
-              ?>
-              <a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-cart"> <?php echo total_cart_quantity(); ?></span></a>
-              <?php
-            }
-             ?>
+          else {
+            ?>
+            <a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-cart"> <?php echo total_cart_quantity(); ?></span></a>
+            <?php
+          }
+          ?>
 
         </div>
         <div class="login-register-wrapper login-target">
@@ -99,7 +123,7 @@ include 'header.php';
       }
 
 
-       ?>
+      ?>
 
 
       <section class="cart-section" id="targrtLink">
@@ -149,19 +173,19 @@ include 'header.php';
                   $pro_image = $row_pro['product_image'];
 
                   ?>
-                <div class="col-lg-4">
-                  <div class="product-box">
-                    <img src="includes/product_images/<?php echo $pro_image; ?>" alt="">
-                    <div class="product-box-content">
-                      <h4><?php echo $pro_title; ?></h4>
-                      <div class="addtocart-btn">
-                        <a href="cart.php?add_cart=<?php echo $pro_id; ?>">add to cart</a>
+                  <div class="col-lg-4">
+                    <div class="product-box">
+                      <img src="includes/product_images/<?php echo $pro_image; ?>" alt="">
+                      <div class="product-box-content">
+                        <h4><?php echo $pro_title; ?></h4>
+                        <div class="addtocart-btn">
+                          <a href="cart.php?add_cart=<?php echo $pro_id; ?>">add to cart</a>
+                        </div>
+                        <h4>&euro;<?php echo $pro_price; ?></h4>
                       </div>
-                      <h4>&euro;<?php echo $pro_price; ?></h4>
                     </div>
                   </div>
-                </div>
-              <?php } ?>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -224,23 +248,6 @@ include 'header.php';
                                   <input type="hidden" name="pro_id_cart_qty[]" value="<?php echo $pro_id; ?>" name="">
                                   <input type="number" class="input-number" name="qty[]" value="<?php echo $qtyd ?>" maxlength="2" min="1">
                                   <span><button class="btn-inc-dec"><i class="fas fa-plus"></i></button></span>
-                                  <?php
-                                  if (isset($_POST['update_cart'])) {
-                                    if (isset($_POST['qty'])) {
-                                      $qty = $_POST['qty'];
-                                      $pro_id_cart_qty = $_POST['pro_id_cart_qty'];
-                                      $array = array_combine($qty,$pro_id_cart_qty);
-                                      foreach ($array as $q => $i) {
-                                        $update_qty = "UPDATE cart SET qty = '$q' WHERE p_id = '$i' AND c_id = '".$_SESSION['customer_id']."'";
-                                        $run_qty = mysqli_query($con, $update_qty);
-                                        // header("location: cart.php?mes=Update cart sucessfully");
-                                        echo("<script>location.href = 'cart.php?mes=Update cart sucessfully'</script>");
-                                      }
-                                      $total = $total * $qtyd;
-                                    }
-                                  }
-
-                                  ?>
                                 </div>
                               </div>
                             </div>
