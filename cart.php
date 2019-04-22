@@ -13,7 +13,7 @@ if (isset($_POST['update_cart'])) {
     $qty = $_POST['qty'];
     $pro_id_cart_qty = $_POST['pro_id_cart_qty'];
     $array = array_combine($pro_id_cart_qty, $qty);
-    print_r($array);
+
     foreach ($array as $i => $q) {
       $single_fetch_price = "SELECT product_price FROM products WHERE product_id = '$i'";
       $run_single_fetch_price = mysqli_query($con, $single_fetch_price);
