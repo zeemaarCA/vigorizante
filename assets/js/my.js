@@ -4,7 +4,7 @@ $(document).ready(function () {
 		$('.menu-links ul li').addClass('animated');
 		$('.menu-links ul li').addClass('slideInLeft');
 		$('.logo, .header-text, .header-btn, .menu-bar span, .scroll').fadeOut(200);
-	})
+	});
 });
 
 $(document).ready(function () {
@@ -13,7 +13,7 @@ $(document).ready(function () {
 		$('.menu-links ul li').removeClass('animated');
 		$('.menu-links ul li').removeClass('slideInLeft');
 		$('.logo, .header-text, .header-btn, .menu-bar span, .scroll').fadeIn(200);
-	})
+	});
 });
 
 	//Jquery Spinner / Quantity Spinner
@@ -55,11 +55,11 @@ function sendContact() {
 			url: "includes/mail.php",
 			data: "userName=" + $("#userName").val() + "&userEmail=" + $("#userEmail").val() + "&content=" + $("#content").val() + "&email_msg=" + $("#email_msg").val(),
 			type: "POST",
-			success: function(a) {
-				$("#mail-status").html(a)
+			success: function (a) {
+				$("#mail-status").html(a);
 			},
-			error: function() {}
-		})
+			error: function () { }
+		});
 	}
 }
 
@@ -70,30 +70,30 @@ function validateContact() {
 	if (!$("#userName").val()) {
 		$("#userName-info").html("*Field is required");
 		$("#userName").css("border-bottom", "2px solid #e53935");
-		b = false
+		b = false;
 	}
 	if (!$("#userEmail").val()) {
 		$("#userEmail-info").html("*Field is required");
 		$("#userEmail").css("border-bottom", "2px solid #e53935");
-		b = false
+		b = false;
 	}
 	if (!$("#userEmail").val().match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
 		$("#userEmail-info").html("*Email is invalid");
 		$("#userEmail").css("border-bottom", "2px solid #e53935");
-		b = false
+		b = false;
 	}
 	if (!$("#content").val()) {
 		$("#content-info").html("*Field is required");
 		$("#content").css("border-bottom", "2px solid #e53935");
-		b = false
+		b = false;
 	}
 	if (!$("#email_msg").val()) {
 		$("#msg-info").html("*Field is required");
 		$("#email_msg").css("border-bottom", "2px solid #e53935");
-		b = false
+		b = false;
 	}
-	return b
-};
+	return b;
+}
 
 
 // login activation
@@ -101,7 +101,7 @@ $(document).ready(function () {
 	$('.login-btn').click(function () {
 		$('.login-target').addClass('login-active');
 		$('.header-img, .login-link, #targrtLink, footer').fadeOut(200);
-	})
+	});
 });
 
 $(document).ready(function () {
@@ -109,14 +109,14 @@ $(document).ready(function () {
 		$('.signup-target').removeClass('login-active');
 		$('.login-target').addClass('login-active');
 		$('.header-img, .login-link,  #targrtLink, footer').fadeOut(200);
-	})
+	});
 });
 
 $(document).ready(function () {
 	$('.close-login-icon').click(function () {
 		$('.login-target').removeClass('login-active');
 		$('.header-img, .login-link, #targrtLink, footer').fadeIn(200);
-	})
+	});
 });
 
 
@@ -126,28 +126,28 @@ $(document).ready(function () {
 	$('.signup-btn').click(function () {
 		$('.signup-target').addClass('login-active');
 		$('.header-img, .login-link, #targrtLink, footer').fadeOut(200);
-	})
+	});
 });
 $(document).ready(function () {
 	$('#trigger-signup').click(function () {
 		$('.signup-target').addClass('login-active');
 		$('.login-target').removeClass('login-active');
 		$('.header-img, .login-link, #targrtLink, footer').fadeOut(200);
-	})
+	});
 });
 
 $(document).ready(function () {
 	$('.close-login-icon').click(function () {
 		$('.signup-target').removeClass('login-active');
 		$('.header-img, .login-link, #targrtLink, footer').fadeIn(200);
-	})
+	});
 });
 
 // wishlist active
 $(document).ready(function () {
 	$('.wishlist').click(function () {
 		$(this).toggleClass('added-to-wishlist');
-	})
+	});
 });
 // wishlist active
 
@@ -295,7 +295,7 @@ $(".toggle-password").click(function () {
 // });
 
 setTimeout(function () {
-	$('.contact-wrapper').addClass('contact-box-shodow')
+	$('.contact-wrapper').addClass('contact-box-shodow');
 }, 3000);
 
 
@@ -303,14 +303,14 @@ setTimeout(function () {
 $('.product-bg').each(function (i) {
 	setTimeout(function () {
 		$('.product-bg').eq(i).addClass('product-visible');
-	}, 200 * i)
+	}, 200 * i);
 });
 // products animation
 
 $(document).ready(function () {
 	$('.red.label').click(function () {
 		$(this).toggleClass('added');
-	})
+	});
 });
 
 
@@ -421,7 +421,7 @@ function initMap() {
 
 	marker.addListener('click', function () {
 		InfoWindow.open(map, marker);
-	})
+	});
 }
 
 // google maps
