@@ -20,245 +20,252 @@ if (isset($_POST['update_cart'])) {
       $product_pricex = mysqli_fetch_assoc($run_single_fetch_price);
 
       $final_total_price_db = $q * $product_pricex['product_price'];
-      $update_qty = "UPDATE cart SET qty = '$q', cart_price = '$final_total_price_db' WHERE p_id = '$i' AND c_id = '".$_SESSION['customer_id']."'";
+      $update_qty = "UPDATE cart SET qty = '$q', cart_price = '$final_total_price_db' WHERE p_id = '$i' AND c_id = '" . $_SESSION['customer_id'] . "'";
       $run_qty = mysqli_query($con, $update_qty);
-
     }
     // header("location: cart.php?mes=Update cart sucessfully");
-    echo("<script>location.href = 'cart.php?mes=Update cart sucessfully'</script>");
+    echo ("<script>location.href = 'cart.php?mes=Update cart sucessfully'</script>");
 
     $total = $total * $qtyd;
   }
 }
 ?>
+
 <body>
 
   <header>
     <!-- <div class="back-logo">
     <h1>Vigorizante</h1>
   </div> -->
-  <div class="header-section">
-    <div class="row">
-      <div class="col-lg-3 pr-0 wow animated slideInLeft"  data-wow-delay="0.8s">
-        <div class="header-left">
-          <div class="scroll wow animated fadeIn" data-wow-delay="3.5s"></div>
-          <div class="menu-bar">
-            <span class="bars"></span>
-          </div>
-          <div class="logo">
-            <h1>Vigorizante</h1>
-          </div>
-          <div class="header-text">
-            <h1>Your Cart</h1>
-            <!-- <div class="header-btn">
+    <div class="header-section">
+      <div class="row">
+        <div class="col-lg-3 pr-0 wow animated slideInLeft" data-wow-delay="0.8s">
+          <div class="header-left">
+            <div class="scroll wow animated fadeIn" data-wow-delay="3.5s"></div>
+            <div class="menu-bar">
+              <span class="bars"></span>
+            </div>
+            <div class="logo">
+              <h1>Vigorizante</h1>
+            </div>
+            <div class="header-text">
+              <h1>Your Cart</h1>
+              <!-- <div class="header-btn">
             <button onclick="targrtLink()">view</button>
           </div> -->
-        </div>
-        <div class="menu-side-overlay">
-          <div class="close-menu-icon">
-            <i class="far fa-times-circle"></i>
-            <div class="menu-bar-wrapper">
-              <div class="menu-links inner">
-                <?php
-                include 'menu.php';
-                ?>
+            </div>
+            <div class="menu-side-overlay">
+              <div class="close-menu-icon">
+                <i class="far fa-times-circle"></i>
+                <div class="menu-bar-wrapper">
+                  <div class="menu-links inner">
+                    <?php
+                    include 'menu.php';
+                    ?>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-lg-9 pl-0">
-      <div class="header-right wow animated slideInRight"  data-wow-delay="0.8s">
-        <div class="login-link">
-          <?php if (!isset($_SESSION['customer_name'])) {
-            echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
-          } else {
-            echo "<a href='profile.php' class='login-btn-idle'>".$_SESSION['customer_name']." /</a><a href='logout.php' class='signup-btn-idle'> Logout</a>";
-          }
-          ?>
-        </div>
+        <div class="col-lg-9 pl-0">
+          <div class="header-right wow animated slideInRight" data-wow-delay="0.8s">
+            <div class="login-link">
+              <?php if (!isset($_SESSION['customer_name'])) {
+                echo "<a href='javascript:void(0)' class='login-btn'>Login /</a><a href='javascript:void(0)' class='signup-btn'> Signup</a>";
+              } else {
+                echo "<a href='profile.php' class='login-btn-idle'>" . $_SESSION['customer_name'] . " /</a><a href='logout.php' class='signup-btn-idle'> Logout</a>";
+              }
+              ?>
+            </div>
 
-        <div class="cart-icon-link">
+            <div class="cart-icon-link">
 
-          <?php if (!isset($_SESSION['customer_name'])) {
-            echo "";
-          }
-          else {
+              <?php if (!isset($_SESSION['customer_name'])) {
+                echo "";
+              } else {
+                ?>
+                <a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-cart"> <?php echo total_cart_quantity(); ?></span></a>
+              <?php
+            }
             ?>
-            <a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-cart"> <?php echo total_cart_quantity(); ?></span></a>
-            <?php
+
+            </div>
+            <div class="login-register-wrapper login-target">
+              <div class="close-login-icon">
+                <i class="far fa-times-circle"></i>
+              </div>
+              <div class="login-form">
+                <div class="form-title">
+                  <h1>login</h1>
+                </div>
+                <?php include 'login_include.php'; ?>
+              </div>
+            </div>
+            <div class="login-register-wrapper signup-target">
+              <div class="close-login-icon">
+                <i class="far fa-times-circle"></i>
+              </div>
+              <div class="login-form">
+                <div class="form-title">
+                  <h1>Signup</h1>
+                </div>
+                <?php include 'signup_include.php'; ?>
+              </div>
+            </div>
+          </div>
+
+          <?php
+
+          if (isset($_GET['add_cart'])) {
+            cart();
           }
+
+
           ?>
 
-        </div>
-        <div class="login-register-wrapper login-target">
-          <div class="close-login-icon">
-            <i class="far fa-times-circle"></i>
-          </div>
-          <div class="login-form">
-            <div class="form-title">
-              <h1>login</h1>
-            </div>
-            <?php include 'login_include.php'; ?>
-          </div>
-        </div>
-        <div class="login-register-wrapper signup-target">
-          <div class="close-login-icon">
-            <i class="far fa-times-circle"></i>
-          </div>
-          <div class="login-form">
-            <div class="form-title">
-              <h1>Signup</h1>
-            </div>
-            <?php include 'signup_include.php'; ?>
-          </div>
-        </div>
-      </div>
 
-      <?php
-
-      if (isset($_GET['add_cart'])){
-        cart();
-      }
-
-
-      ?>
-
-
-      <section class="cart-section" id="targrtLink">
-        <div class="container">
-          <p class="bg-success text-white p-2 d-none <?php if(@$_GET['mes']){echo 'd-block';};?>"><?php if(@$_GET['mes']){echo "Cart has been successfully upadated";}; ?></p>
-          <!-- <div class="cart-title">
+          <section class="cart-section" id="targrtLink">
+            <div class="container">
+              <p class="bg-success text-white p-2 d-none <?php if (@$_GET['mes']) {
+                                                            echo 'd-block';
+                                                          }; ?>"><?php if (@$_GET['mes']) {
+                                                                                                        echo "Cart has been successfully upadated";
+                                                                                                      }; ?></p>
+              <!-- <div class="cart-title">
           <h1>Cart</h1>
         </div> -->
-        <?php
-        $get_items = "SELECT * FROM cart WHERE c_id = '".$_SESSION['customer_id']."'";
-        $run_items = mysqli_query($con, $get_items);
-        $count_items = mysqli_num_rows($run_items);
-        $cart_item_qty = $count_items;
-        if ($cart_item_qty == 0) {
+              <?php
+              $get_items = "SELECT * FROM cart WHERE c_id = '" . $_SESSION['customer_id'] . "'";
+              $run_items = mysqli_query($con, $get_items);
+              $count_items = mysqli_num_rows($run_items);
+              $cart_item_qty = $count_items;
+              if ($cart_item_qty == 0) {
 
-          ?>
-          <div class="content-box">
-            <div class="box-title">
-              <h3>Shopping Cart</h3>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <p>Your shopping cart is empty.</p>
-              </div>
-              <div class="col-lg-6 text-right">
-                <a href="products.php">Add products to cart</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="best-sellers">
-            <div class="container">
-              <div class="product-title">
-                <h1>Recommended Products</h1>
-              </div>
-              <div class="row">
-                <?php
-                $get_pro = "SELECT * FROM products";
-                $run_pro = mysqli_query($con, $get_pro);
-
-                while ($row_pro = mysqli_fetch_array($run_pro)) {
-                  $pro_id = $row_pro['product_id'];
-                  $pro_cat = $row_pro['product_cat'];
-                  $pro_title = $row_pro['product_title'];
-                  $pro_price = $row_pro['product_price'];
-                  $pro_desc = $row_pro['product_desc'];
-                  $pro_image = $row_pro['product_image'];
-
-                  ?>
-                  <div class="col-lg-4">
-                    <div class="product-box">
-                      <img src="includes/product_images/<?php echo $pro_image; ?>" alt="">
-                      <div class="product-box-content">
-                        <h4><?php echo $pro_title; ?></h4>
-                        <div class="addtocart-btn">
-                          <a href="cart.php?add_cart=<?php echo $pro_id; ?>">add to cart</a>
-                        </div>
-                        <h4>&euro;<?php echo $pro_price; ?></h4>
-                      </div>
+                ?>
+                <div class="content-box">
+                  <div class="box-title">
+                    <h3>Shopping Cart</h3>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <p>Your shopping cart is empty.</p>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                      <a href="products.php">Add products to cart</a>
                     </div>
                   </div>
-                <?php } ?>
-              </div>
-            </div>
-          </div>
-          <?php
-        }
-        else {
+                </div>
 
-          ?>
+                <div class="best-sellers">
+                  <div class="container">
+                    <div class="product-title">
+                      <h1>Recommended Products</h1>
+                    </div>
+                    <div class="row">
+                      <?php
+                      $get_pro = "SELECT * FROM products";
+                      $run_pro = mysqli_query($con, $get_pro);
 
-          <div class="row mx-0">
-            <div class="table-responsive">
-              <form class="w-100" action="" method="post" enctype="multipart/form-data">
-                <table class="table cart-table mb-0">
-                  <thead>
-                    <tr>
-                      <th scope="col" width="35%">Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col" width="29%">Quantity</th>
-                      <th scope="col">total</th>
-                      <th scope="col">&nbsp;</th>
-                    </tr>
-                  </thead>
-                  <?php
-                  $total = 0;
-                  global $con;
-                  $ip = getIp();
-                  $sel_price = "SELECT * FROM cart WHERE c_id = '".$_SESSION['customer_id']."'";
-                  $run_price = mysqli_query($con, $sel_price);
-                  while ($p_price = mysqli_fetch_array($run_price)) {
-                    $pro_id = $p_price['p_id'];
-                    $qtyd = $p_price['qty'];
-                    // echo $qtyd;
-                    $pro_price = "SELECT * FROM products WHERE product_id = '$pro_id'";
-                    $run_pro_price = mysqli_query($con, $pro_price);
-                    while ($pp_price = mysqli_fetch_array($run_pro_price)) {
-                      $product_price = array($pp_price['product_price']);
-                      $single_price = $pp_price['product_price'];
-                      $product_title = $pp_price['product_title'];
-                      $product_image = $pp_price['product_image'];
-                      $total_qty_price = $single_price * $qtyd;
-                      $values = array_sum($product_price);
-                      $mega_total = $values * $qtyd;
-                      $total += $mega_total;
+                      while ($row_pro = mysqli_fetch_array($run_pro)) {
+                        $pro_id = $row_pro['product_id'];
+                        $pro_cat = $row_pro['product_cat'];
+                        $pro_title = $row_pro['product_title'];
+                        $pro_price = $row_pro['product_price'];
+                        $pro_desc = $row_pro['product_desc'];
+                        $pro_image = $row_pro['product_image'];
 
-                      ?>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div class="item-img">
-                              <img src="includes/product_images/<?php echo $product_image; ?>" alt="">
-                              <p><?php echo $product_title; ?></p>
-                            </div>
-                          </td>
-                          <td>&pound<?php echo $single_price; ?></td>
-                          <td>
-                            <div class="form">
-                              <div class="form-group">
-                                <div class="input-group">
-                                  <span><button class="btn-inc-dec"><i class="fas fa-minus"></i></button></span>
-                                  <input type="hidden" name="pro_id_cart_qty[]" value="<?php echo $pro_id; ?>" name="">
-                                  <input type="number" class="input-number" name="qty[]" value="<?php echo $qtyd ?>" maxlength="2" min="1">
-                                  <span><button class="btn-inc-dec"><i class="fas fa-plus"></i></button></span>
-                                </div>
+                        ?>
+                        <div class="col-lg-4">
+                          <div class="product-box">
+                            <img src="includes/product_images/<?php echo $pro_image; ?>" alt="">
+                            <div class="product-box-content">
+                              <h4><?php echo $pro_title; ?></h4>
+                              <div class="addtocart-btn">
+                                <a href="cart.php?add_cart=<?php echo $pro_id; ?>">add to cart</a>
                               </div>
+                              <h4>&euro;<?php echo $pro_price; ?></h4>
                             </div>
-                          </td>
-                          <td>&euro;<?php echo $total_qty_price; ?></td>
-                          <td><a href="cart.php?del=<?php echo $pro_id; ?>" class="remove" onClick="return confirm('Delete This item?')" name="del_product"><i class="far fa-times-circle"></i></td>
-                          </tr>
-                        <?php }} ?>
-                      </tbody>
+                          </div>
+                        </div>
+                      <?php } ?>
+                    </div>
+                  </div>
+                </div>
+              <?php
+            } else {
 
-                    </table>
+              ?>
+
+                <div class="row mx-0">
+                  <div class="table-responsive">
+                    <form class="w-100" action="" method="post" enctype="multipart/form-data">
+                      <table class="table cart-table mb-0">
+                        <thead>
+                          <tr>
+                            <th scope="col" width="35%">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col" width="29%">Quantity</th>
+                            <th scope="col">total</th>
+                            <th scope="col">&nbsp;</th>
+                          </tr>
+                        </thead>
+                        <?php
+                        $total = 0;
+                        global $con;
+                        $ip = getIp();
+                        $sel_price = "SELECT * FROM cart WHERE c_id = '" . $_SESSION['customer_id'] . "'";
+                        $run_price = mysqli_query($con, $sel_price);
+                        while ($p_price = mysqli_fetch_array($run_price)) {
+                          $pro_id = $p_price['p_id'];
+                          $qtyd = $p_price['qty'];
+                          // echo $qtyd;
+                          $pro_price = "SELECT * FROM products WHERE product_id = '$pro_id'";
+                          $run_pro_price = mysqli_query($con, $pro_price);
+                          while ($pp_price = mysqli_fetch_array($run_pro_price)) {
+                            $product_price = array($pp_price['product_price']);
+                            $single_price = $pp_price['product_price'];
+                            $product_title = $pp_price['product_title'];
+                            $product_image = $pp_price['product_image'];
+                            $total_qty_price = $single_price * $qtyd;
+                            $values = array_sum($product_price);
+                            $mega_total = $values * $qtyd;
+                            $total += $mega_total;
+
+                            ?>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <div class="item-img">
+                                    <img src="includes/product_images/<?php echo $product_image; ?>" alt="">
+                                    <p><?php echo $product_title; ?></p>
+                                  </div>
+                                </td>
+                                <td>&pound<?php echo $single_price; ?></td>
+                                <td>
+                                  <div class="form">
+                                    <input type="hidden" name="pro_id_cart_qty[]" value="<?php echo $pro_id; ?>" name="">
+                                    <div class="form-group">
+                                      <div class="quantity-spinner">
+                                        <button type="button" class="minus btn-inc-dec">
+                                          <span class="fa fa-minus"></span>
+                                        </button>
+                                        <input type="text" name="qty[]" value="<?php echo $qtyd ?>" class="prod_qty input-number">
+                                        <button type="button" class="plus btn-inc-dec">
+                                          <span class="fa fa-plus"></span>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td>&euro;<?php echo $total_qty_price; ?></td>
+                                <td><a href="cart.php?del=<?php echo $pro_id; ?>" class="remove" onClick="return confirm('Delete This item?')" name="del_product"><i class="far fa-times-circle"></i></td>
+                              </tr>
+                            <?php }
+                        } ?>
+                        </tbody>
+
+                      </table>
                   </div>
                 </div>
 
@@ -300,27 +307,28 @@ if (isset($_POST['update_cart'])) {
 
 
             </div>
-          </form>
-        </section>
-        <?php
-        $ip = getIp();
-        if (isset($_GET['del'])) {
-          $del_id = $_GET['del'];
-          $delete_product = "DELETE FROM cart WHERE p_id = '$del_id' AND ip_add = '$ip'";
-          $run_delete = mysqli_query($con, $delete_product);
-          if ($run_delete) {
-            echo "<script>window.open('cart.php', '_self')</script>";
+            </form>
+          </section>
+          <?php
+          $ip = getIp();
+          if (isset($_GET['del'])) {
+            $del_id = $_GET['del'];
+            $delete_product = "DELETE FROM cart WHERE p_id = '$del_id' AND ip_add = '$ip'";
+            $run_delete = mysqli_query($con, $delete_product);
+            if ($run_delete) {
+              echo "<script>window.open('cart.php', '_self')</script>";
+            }
           }
-        }
 
-        ?>
-        <?php include 'footer.php'; ?>
+          ?>
+          <?php include 'footer.php'; ?>
+        </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 
 
-<?php include 'scripts.php'; ?>
+  <?php include 'scripts.php'; ?>
 </body>
+
 </html>

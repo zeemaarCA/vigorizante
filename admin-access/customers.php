@@ -124,7 +124,7 @@ include '../functions.php';
                                   <td><?php echo $cus_city; ?></td>
                                   <td><?php echo $cus_contact; ?></td>
                                   <td><?php echo $cus_address; ?></td>
-                                    <td><a href="delete_product.php?del=<?php echo $pro_id; ?>" onClick="return confirm('Delete This item?')" class="del-icon"><i class="fa fa-trash"></i></td>
+                                    <td><a href="delete_user.php?del=<?php echo $cus_id; ?>" onClick="return confirm('Delete This item?')" class="del-icon"><i class="fa fa-trash"></i></td>
                                     </tr>
                                   </tbody>
                                 <?php } ?>

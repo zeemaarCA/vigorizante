@@ -16,6 +16,20 @@ $(document).ready(function () {
 	})
 });
 
+	//Jquery Spinner / Quantity Spinner
+	if ($('.quantity-spinner').length) {
+		$('.quantity-spinner .plus').on('click', function () {
+			var val = $(this).prev('.prod_qty').val();
+			$(this).prev('.prod_qty').val((val * 1) + 1);
+		});
+		$('.quantity-spinner .minus').on('click', function () {
+			var val = $(this).next('.prod_qty').val();
+			if (val != 1) {
+				$(this).next('.prod_qty').val((val * 1) - 1);
+			}
+		});
+	}
+
 
 // trigger-toast
 $('.trigger-toast').click(function () {
